@@ -11,12 +11,20 @@
 				<div class="card-title"></div>
 				<div class="card-body" id="main">
 					<div id="user-messages"></div>
-					<div id="word-to-guess-container" class="row">
+					<div id="word-to-guess-container" class="row d-flex align-items-end">
 						<div class="col-10" id="word-to-guess-div">
 							<label for="word-to-guess-input" class="form-label">Enter a word to guess:</label>
 							<input type="text" class="form-control" id="word-to-guess-input" placeholder="Your word...">
 						</div>
 						<div id="button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
+					</div>
+					<div id="word-progress-container"></div>
+					<div id="hangman-graphic-container">
+						<img src="" class="img-fluid" alt="...">
+					</div>
+					<div id="used-letters-container">
+						<h4>Used letters</h4>
+						<div id="used-letters-div"></div>
 					</div>
 				</div>
 			</div>
