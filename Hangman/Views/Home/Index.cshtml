@@ -1,8 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@*Hangman home page*@
+
+@{
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="container">
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body" id="main">
+					<div class="card">
+						<div class="card-title">Hangman</div>
+						<div class="card-body">
+							<form>
+								<div class="row form-group mb-3" id="main-div"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+@section styles
+	{
+	@* <link rel="stylesheet" href="~/assets/css/customSort.css" /> *@
+}
+
+@section scripts {
+	<script src="~/assets/js/scripts.js"></script>
+	<script type="text/javascript">
+		const pageTitle = "Hangman game";
+
+		$(document).ready(async function ()
+		{
+			$(document).attr("title", pageTitle);
+
+		});
+
+		</script>
+	}
