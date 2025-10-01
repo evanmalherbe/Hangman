@@ -8,14 +8,15 @@
 	<div class="row">
 		<div class="col">
 			<div class="card">
+				<div class="card-title"></div>
 				<div class="card-body" id="main">
-					<div class="card">
-						<div class="card-title">Hangman</div>
-						<div class="card-body">
-							<form>
-								<div class="row form-group mb-3" id="main-div"></div>
-							</form>
+					<div id="user-messages"></div>
+					<div id="word-to-guess-container" class="row">
+						<div class="col-10" id="word-to-guess-div">
+							<label for="word-to-guess-input" class="form-label">Enter a word to guess:</label>
+							<input type="text" class="form-control" id="word-to-guess-input" placeholder="Your word...">
 						</div>
+						<div id="button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
 					</div>
 				</div>
 			</div>
@@ -24,7 +25,7 @@
 </div>
 
 @section styles
-	{
+{
 	@* <link rel="stylesheet" href="~/assets/css/customSort.css" /> *@
 }
 
@@ -38,6 +39,16 @@
 			$(document).attr("title", pageTitle);
 
 		});
-
+		
+		function saveWord()
+		{
+			let word = $("#word-to-guess-input").val();
+			if (word == "")
+			{
+				return;
+			}
+			word = word.trim();
+			debugger;
+		}
 		</script>
 	}
