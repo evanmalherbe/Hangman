@@ -11,20 +11,29 @@
 				<div class="card-title"></div>
 				<div class="card-body" id="main">
 					<div id="user-messages"></div>
-					<div id="word-to-guess-container" class="row d-flex align-items-end">
-						<div class="col-10" id="word-to-guess-div">
-							<label for="word-to-guess-input" class="form-label">Enter a word to guess:</label>
-							<input type="text" class="form-control" id="word-to-guess-input" placeholder="Your word...">
+					<div id="secret-word-container" class="row d-flex align-items-end">
+						<div class="col-6" id="secret-word-div">
+							<label for="secret-word-input" class="form-label">Enter the secret word to be guessed:</label>
+							<input type="text" class="form-control" id="secret-word-input" placeholder="Your word...">
 						</div>
-						<div id="button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
+						<div id="secret-word-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
 					</div>
-					<div id="word-progress-container"></div>
-					<div id="hangman-graphic-container">
-						<img src="" class="img-fluid" alt="...">
+					<div id="guess-container" class="row d-none align-items-end">
+						<div class="col-3" id="guess-div">
+							<label for="guess-input" class="form-label">Guess a letter:</label>
+							<input type="text" class="form-control" id="guess-input" placeholder="">
+						</div>
+						<div id="guess-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="letterGuess()">Guess</button></div>
+					</div>
+					<div id="word-progress-container" class="row p-3">
+						
+					</div>
+					<div id="hangman-graphic-container" class="col-12 p-3">
+						<img src="~/hangman-example.png" class="border border-dark" alt="hangman">
 					</div>
 					<div id="used-letters-container">
-						<h4>Used letters</h4>
-						<div id="used-letters-div"></div>
+						<h4>Used Letters</h4>
+						<p id="used-letters"></p>
 					</div>
 				</div>
 			</div>
@@ -38,9 +47,11 @@
 }
 
 @section scripts {
-	<script src="~/assets/js/scripts.js"></script>
+
 	<script type="text/javascript">
 		const pageTitle = "Hangman game";
+		let secretWord = "";
+		let secretArray = [];
 
 		$(document).ready(async function ()
 		{
@@ -50,13 +61,87 @@
 		
 		function saveWord()
 		{
-			let word = $("#word-to-guess-input").val();
+			let word = $("#secret-word-input").val();
 			if (word == "")
 			{
 				return;
 			}
-			word = word.trim();
+			secretWord = word.trim();
+			secretArray = secretWord.split("");
+			$("#secret-word-container").removeClass("d-flex").hide();
+			$("#guess-container").addClass("d-flex").removeClass("d-none");
+			let $wordProgressContainer = $("#word-progress-container");
+			secretArray.forEach((secretLetter, index) => {
+				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
+			});
+			
+		}
+		function processMatchingLetters(matchArray)
+		{
+			if (matchArray.length > 0)
+			{
+				let matchedLettersIndexArray = [];
+				matchArray.forEach((guessedLetter, index) => 
+				{
+					secretArray.forEach((secretLetter, index) => 
+					{
+						if (secretLetter === guessedLetter)
+						{
+							matchedLettersIndexArray.push(index);
+						}
+					});
+				});
+
+				if (matchedLettersIndexArray.length > 0)
+				{
+					matchedLettersIndexArray.forEach((letterIndex, index) => 
+					{
+						$(`#letter-dash-${letterIndex}`).hide();
+						$(`#letter-match-${letterIndex}`).show();
+					});
+				}
+			}
+		}
+		function letterGuess()
+		{
+			let letter = $("#guess-input").val();
+			if (letter === "")
+			{
+				return;
+			}
+			if (secretWord === "")
+			{
+				$("#user-messages").append("<span class='text-danger'>No secret word chosen yet!</span>");
+				return;
+			}
+			letter = letter.trim();
+			$("#used-letters").append(letter);
+			$("#guess-input").val("");
+		
+			let isLetterValid = false;
+			let matchCount = 0;
+			let matchingLettersArray = [];
+			secretArray.forEach((secretLetter, index) => 
+			{
+				if (secretLetter === "" || secretLetter === " ")
+				{
+					return;
+				}
+				if (secretLetter === letter)
+				{
+					matchCount++;
+					if (!matchingLettersArray.includes(letter))
+					{
+						matchingLettersArray.push(letter);
+					}
+				}
+			});
 			debugger;
+			if (matchCount > 0)
+			{
+				processMatchingLetters(matchingLettersArray);
+			}
+			
 		}
 		</script>
 	}
