@@ -4,46 +4,49 @@
 
 }
 
-<div id="container">
-	<div class="row">
-		<div class="col">
-			<div class="card">
-				<div class="card-title"></div>
-				<div class="card-body" id="main">
-					<div id="user-messages"></div>
-					<div id="secret-word-container" class="row d-flex align-items-end">
-						<div class="col-6" id="secret-word-div">
-							<label for="secret-word-input" class="form-label">Enter the secret word to be guessed:</label>
-							<input type="text" class="form-control" id="secret-word-input" placeholder="Your word...">
-						</div>
-						<div id="secret-word-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
-					</div>
-					<div id="guess-container" class="row d-none align-items-end">
-						<div class="col-3" id="guess-div">
-							<label for="guess-input" class="form-label">Guess a letter:</label>
-							<input type="text" class="form-control" id="guess-input" placeholder="">
-						</div>
-						<div id="guess-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="letterGuess()">Guess</button></div>
-					</div>
-					<div id="word-progress-container" class="row p-3">
-						
-					</div>
+<div id="container" class="wide-container">
+		<div class="card">
+			<div class="card-title"></div>
+			<div class="card-body row" id="main">
+				<div id="left-container" class="col-6">
+          <div id="user-messages"></div>
+          <div id="secret-word-container" class="row d-flex align-items-end">
+            <div class="col-6" id="secret-word-div">
+              <label for="secret-word-input" class="form-label">Enter the secret word to be guessed:</label>
+              <input type="text" class="form-control" id="secret-word-input" placeholder="Your word...">
+            </div>
+            <div id="secret-word-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
+          </div>
+          <div id="guess-container" class="row d-none align-items-end">
+            <div class="col-3" id="guess-div">
+              <label for="guess-input" class="form-label">Guess a letter:</label>
+              <input type="text" class="form-control" id="guess-input" placeholder="">
+            </div>
+            <div id="guess-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="letterGuess()">Guess</button></div>
+          </div>
+          <div id="word-progress-container" class="row mt-2 mb-2 p-3 border"></div>
+          <div id="used-letters-container">
+            <h4>Used Letters</h4>
+            <p id="used-letters"></p>
+          </div>
+				</div>
+				<div id="right-container" class="col-6">
 					<div id="hangman-graphic-container" class="col-12 p-3">
 						<img src="~/hangman-example.png" class="border border-dark" alt="hangman">
-					</div>
-					<div id="used-letters-container">
-						<h4>Used Letters</h4>
-						<p id="used-letters"></p>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 @section styles
 {
 	@* <link rel="stylesheet" href="~/assets/css/customSort.css" /> *@
+	<link href="~/assets/libs/toastr/build/toastr.min.css" rel="stylesheet" />
+	<style type="text/css">
+		.wide-container { margin: 10px; }
+	</style>
+		
 }
 
 @section scripts {
@@ -66,7 +69,7 @@
 			{
 				return;
 			}
-			secretWord = word.trim();
+			secretWord = word.trim().toLowerCase();
 			secretArray = secretWord.split("");
 			$("#secret-word-container").removeClass("d-flex").hide();
 			$("#guess-container").addClass("d-flex").removeClass("d-none");
