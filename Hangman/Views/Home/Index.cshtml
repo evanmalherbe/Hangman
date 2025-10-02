@@ -29,9 +29,14 @@
             <h4>Used Letters</h4>
             <p id="used-letters"></p>
           </div>
+					<div id="tries-counter">
+						<h4>Your Tries</h4>
+						<span id="tries-count-message" class=""><strong>0 out of 11</strong></span>
+					</div>
 				</div>
 				<div id="right-container" class="col-6">
-					<div id="hangman-graphic-container" class="col-12 p-3">
+					<div id="big-user-message-div" class="p-3 border"></div>
+					<div id="hangman-graphic-container" class="p-3">
 						<img id="hangman-image" src="hangman-final.png" class="" alt="hangman image">
 					</div>
 				</div>
@@ -60,7 +65,7 @@
 		$(document).ready(async function ()
 		{
 			$(document).attr("title", pageTitle);
-
+			
 		});
 		
 		function saveWord()
@@ -84,6 +89,7 @@
 		{
 			if (matchArray.length > 0)
 			{
+				$("#big-user-message-div").empty().append("<span class='text-success'><h3>Good job!</h3></span>");
 				let matchedLettersIndexArray = [];
 				matchArray.forEach((guessedLetter, index) => 
 				{
@@ -151,7 +157,7 @@
 			}
 			else
 			{
-				debugger;
+				$("#big-user-message-div").empty().append("<span class='text-danger'><h3>Oh no!</h3></span>");
 				failedTriesCount++;
 				showRelevantImage();
 			}
@@ -161,6 +167,7 @@
 			if (failedTriesCount > 0 && failedTriesCount < 12)
 			{
 				$("#hangman-image").attr("src",`hangman-${failedTriesCount}.png`);
+				$("#tries-count-message").empty().append(`<strong>${failedTriesCount} out of 11</strong>`);
 			}
 		}
 		</script>
