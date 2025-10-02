@@ -32,7 +32,7 @@
 				</div>
 				<div id="right-container" class="col-6">
 					<div id="hangman-graphic-container" class="col-12 p-3">
-						<img src="~/hangman-example.png" class="border border-dark" alt="hangman">
+						<img id="hangman-image" src="hangman-final.png" class="" alt="hangman image">
 					</div>
 				</div>
 			</div>
@@ -55,6 +55,7 @@
 		const pageTitle = "Hangman game";
 		let secretWord = "";
 		let secretArray = [];
+		let failedTriesCount = 0;
 
 		$(document).ready(async function ()
 		{
@@ -77,7 +78,7 @@
 			secretArray.forEach((secretLetter, index) => {
 				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 			});
-			
+			$("#hangman-image").attr("src","hangman-0.png");
 		}
 		function processMatchingLetters(matchArray)
 		{
@@ -118,10 +119,10 @@
 				return;
 			}
 			letter = letter.trim();
+			$("#user-messages").empty();
 			$("#used-letters").append(letter);
 			$("#guess-input").val("");
 		
-			let isLetterValid = false;
 			let matchCount = 0;
 			let matchingLettersArray = [];
 			secretArray.forEach((secretLetter, index) => 
@@ -132,19 +133,35 @@
 				}
 				if (secretLetter === letter)
 				{
-					matchCount++;
+					// if (matchingLettersArray.includes(letter))
+					// {
+					// 	$("#user-messages").append("<span class='text-danger'>Already tried that letter!</span>");
+					// 	return;
+					// }
 					if (!matchingLettersArray.includes(letter))
 					{
+						matchCount++;
 						matchingLettersArray.push(letter);
 					}
 				}
 			});
-			debugger;
 			if (matchCount > 0)
 			{
 				processMatchingLetters(matchingLettersArray);
 			}
-			
+			else
+			{
+				debugger;
+				failedTriesCount++;
+				showRelevantImage();
+			}
+		}
+		function showRelevantImage()
+		{
+			if (failedTriesCount > 0 && failedTriesCount < 12)
+			{
+				$("#hangman-image").attr("src",`hangman-${failedTriesCount}.png`);
+			}
 		}
 		</script>
 	}
