@@ -8,7 +8,7 @@
 		<div class="card">
 			<div class="card-title"></div>
 			<div class="card-body row" id="main">
-				<div id="left-container" class="col-6 border border-dark">
+				<div id="left-container" class="col-6">
           <div id="user-messages"></div>
           <div id="secret-word-container" class="row d-flex align-items-end">
             <div class="col-6" id="secret-word-div">
@@ -25,11 +25,11 @@
             <div id="guess-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="letterGuess()">Guess</button></div>
           </div>
           <div id="word-progress-container" class="row mt-3 mb-3 ms-0 me-0 p-3"></div>
-          <div id="used-letters-container" class="mt-3 mb-3 p-3">
+          <div id="used-letters-container" class="mt-3 mb-3 p-3 d-none">
             <h4>Used Letters</h4>
             <p id="used-letters"></p>
           </div>
-					<div id="tries-counter" class="mt-3 mb-3 p-3">
+					<div id="tries-counter" class="mt-3 mb-3 p-3 d-none">
 						<h4>Your Tries</h4>
 						<span id="tries-count-message" class=""><strong>0 out of 11</strong></span>
 					</div>
@@ -134,20 +134,29 @@
 			}
 			secretWord = word.trim().toLowerCase();
 			secretArray = secretWord.split("");
+			// Hide secret word entry and show guess entry and other stats
 			$("#secret-word-container").removeClass("d-flex").hide();
 			$("#guess-container").addClass("d-flex").removeClass("d-none");
+			$("#used-letters-container").removeClass("d-none");
+			$("#tries-counter").removeClass("d-none");
+			// Add word progress container
 			let $wordProgressContainer = $("#word-progress-container");
 			secretArray.forEach((secretLetter, index) => {
 				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 			});
+
 			$("#hangman-image").attr("src","hangman-0.png");
 		}
 		function processMatchingLetters(matchArray)
 		{
 			if (matchArray.length > 0)
 			{
-				$("#big-user-message-div").empty().append("<span class='text-success'><h3>Good job!</h3></span>");
+				$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success' style='display:none'><h3>Good job!</h3></span>");
 				glowDiv("word-progress-container", "green");
+				$("#goodMessage").stop(true, true)         // reset any running animation
+												.fadeIn(400)              // fade in over 0.4s
+												.delay(2000)              // stay visible for 2s
+												.fadeOut(600); 
 				let matchedLettersIndexArray = [];
 				matchArray.forEach((guessedLetter, index) => 
 				{
@@ -215,8 +224,12 @@
 			}
 			else
 			{
-				$("#big-user-message-div").empty().append("<span class='text-danger'><h3>Oh no!</h3></span>");
-				glowDiv("tries-counter", "red")
+				$("#big-user-message-div").empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
+				glowDiv("tries-counter", "red");
+				$("#badMessage").stop(true, true)         // reset any running animation
+												.fadeIn(400)              // fade in over 0.4s
+												.delay(2000)              // stay visible for 2s
+												.fadeOut(600); 
 				failedTriesCount++;
 				showRelevantImage();
 			}
@@ -226,7 +239,7 @@
 			if (failedTriesCount > 0 && failedTriesCount < 12)
 			{
 				$("#hangman-image").attr("src",`hangman-${failedTriesCount}.png`);
-				$("#tries-count-message").empty().append(`<strong>${failedTriesCount} out of 11</strong>`);
+				$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
 			}
 		}
 		</script>
