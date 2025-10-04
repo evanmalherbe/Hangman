@@ -4,104 +4,151 @@
 
 }
 
-<div id="container" class="wide-container">
-		<div class="card">
-			<div class="card-title"></div>
-			<div class="card-body row" id="main">
-				<div id="left-container" class="col-6">
-          <div id="user-messages"></div>
-          <div id="secret-word-container" class="row d-flex align-items-end">
-            <div class="col-6" id="secret-word-div">
-              <label for="secret-word-input" class="form-label">Enter the secret word to be guessed:</label>
-              <input type="text" class="form-control" id="secret-word-input" placeholder="Your word...">
-            </div>
-            <div id="secret-word-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="saveWord()">Choose</button></div>
-          </div>
-          <div id="guess-container" class="row d-none align-items-end">
-            <div class="col-3" id="guess-div">
-              <label for="guess-input" class="form-label">Guess a letter:</label>
-              <input type="text" class="form-control" id="guess-input" placeholder="">
-            </div>
-            <div id="guess-button-div" class="col-2"><button type="button" class="btn btn-primary" onclick="letterGuess()">Guess</button></div>
-          </div>
-          <div id="word-progress-container" class="row mt-3 mb-3 ms-0 me-0 p-3"></div>
-          <div id="used-letters-container" class="mt-3 mb-3 p-3 d-none">
-            <h4>Used Letters</h4>
-            <p id="used-letters"></p>
-          </div>
-					<div id="tries-counter" class="mt-3 mb-3 p-3 d-none">
-						<h4>Your Tries</h4>
-						<span id="tries-count-message" class=""><strong>0 out of 11</strong></span>
+<div class="container-fluid py-4 bg-light min-vh-100">
+	<div class="row justify-content-center m-0">
+		<div class="col-lg-11 col-xl-10">
+			<div class="card shadow-lg border-0 rounded-4">
+				<div class="card-header bg-gradient text-white text-center p-4 rounded-top-4" style="background-color: #007bff; background-image: linear-gradient(135deg, #007bff 0%, #0056b3 100%);">
+					<h1 class="mb-0 fw-bold">Hangman Game</h1>
+				</div>
+				<div class="card-body p-4 p-md-5">
+					<div id="user-messages" class="mb-4">
+						<!-- Dynamic user messages will appear here, e.g., Bootstrap alerts -->
+					</div>
+
+					<div class="row g-4">
+						<!-- Left Column: Word Entry, Guessing, Progress -->
+						<div class="col-md-7 d-flex flex-column">
+
+							<!-- Secret Word Entry -->
+							<div id="secret-word-container" class="mb-4 p-3 border rounded-3 bg-white">
+								<label for="secret-word-input" class="form-label fs-5">Enter the secret word to be guessed:</label>
+								<div class="input-group">
+									<input type="text" class="form-control form-control-lg" id="secret-word-input" placeholder="Your word..." aria-label="Secret word input">
+									<button type="button" class="btn btn-primary btn-lg" onclick="saveWord()">Choose</button>
+								</div>
+							</div>
+
+							<!-- Guessing Interface (initially hidden) -->
+							<div id="guess-container" class="d-none mb-4 p-3 border rounded-3 bg-white">
+								<label for="guess-input" class="form-label fs-5">Guess a letter:</label>
+								<div class="input-group">
+									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
+									<button type="button" class="btn btn-success btn-lg" onclick="letterGuess()">Guess Letter</button>
+								</div>
+							</div>
+
+							<!-- Word Progress -->
+							<div id="word-progress-container" class="mt-4 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace">
+								<!-- Example: _ _ _ _ -->
+							</div>
+
+							<!-- Used Letters & Tries Counter -->
+							<div class="row mt-auto g-3">
+								<div id="used-letters-container" class="col-md-6 d-none">
+									<div class="card card-body bg-light border-secondary">
+										<h5 class="card-title text-secondary mb-2">Used Letters</h5>
+										<p id="used-letters" class="mb-0 fs-4 fw-bold text-muted text-uppercase"></p>
+									</div>
+								</div>
+								<div id="tries-counter-parent" class="col-md-6 d-none">
+									<div id="tries-counter"  class="card card-body bg-light border-secondary rounded-3 bg-white">
+										<h5 class="card-title text-secondary mb-2">Your Tries</h5>
+										<span id="tries-count-message" class="fs-4 fw-bold text-primary"><strong>0 out of 11</strong></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Right Column: Hangman Graphic & Big Message -->
+						<div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
+							<div id="hangman-graphic-container" class="p-3 bg-white border rounded shadow-sm mb-4" style="max-width: 300px;">
+								<img id="hangman-image" src="hangman-final.png" class="img-fluid" alt="Hangman Progress">
+							</div>
+							<div id="big-user-message-div" class="text-center mt-auto p-3 fs-4 fw-semibold text-danger">
+								<!-- e.g., "You Lose!" or "You Win!" -->
+							</div>
+						</div>
 					</div>
 				</div>
-				<div id="right-container" class="col-6">
-					<div id="big-user-message-div" class="p-3"></div>
-					<div id="hangman-graphic-container" class="p-3">
-						<img id="hangman-image" src="hangman-final.png" class="" alt="hangman image">
-					</div>
+				<div class="card-footer text-muted text-center p-3 rounded-bottom-4">
+					Hangman Game powered by Bootstrap 5
 				</div>
 			</div>
 		</div>
+	</div>
 </div>
 
 @section styles
 {
-	@* <link rel="stylesheet" href="~/assets/css/customSort.css" /> *@
+	<!-- External Toastr for notifications (good choice!) -->
 	<link href="~/assets/libs/toastr/build/toastr.min.css" rel="stylesheet" />
+
 	<style type="text/css">
-		.wide-container { margin: 10px; }
-		 .box {
-      width: 200px;
-      height: 100px;
-      border: 1px solid #ccc;
-      margin: 50px auto;
-      text-align: center;
-      line-height: 100px;
-      font-family: sans-serif;
-    }
-		.left-container {
-			max-height: 100vh; /* 100% of the viewport height */
-			overflow-y: auto; 
+		/* General Body / Background */
+		body { background-color: #f8f9fa; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+
+		/* Main container adjustments for a central, framed look */
+		.container-fluid { /* Already full-width, py-4 adds vertical padding, min-vh-100 makes sure it takes full viewport height */ }
+
+		/* Card Styling - Bootstrap takes care of much of this, but we reinforce it */
+		.card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Stronger, more modern shadow */ border-radius: 1rem !important; /* Rounded corners */ }
+
+		/* Card Header for a gradient effect */
+		.card-header { border-bottom: none; /* Remove default border */ }
+
+		/* Input and Button sizing for a bolder feel */
+		.input-group .form-control-lg,
+		.input-group .btn-lg { height: calc(3.5rem + 2px); /* Larger input and button height */ }
+
+		/* Word Progress container for clear display */
+		#word-progress-container { min-height: 80px; /* Ensure it has some height even if empty */ display: flex; /* Use flexbox for better centering */ align-items: center; justify-content: center; letter-spacing: 0.5rem; /* Space out the letters */ background-color: #e9ecef; /* Slightly darker background for emphasis */ color: #343a40; /* Darker text */ border: 1px dashed #adb5bd !important; /* Dashed border for a hint of playfulness */ }
+
+		/* Used Letters and Tries Counter - styling their internal cards */
+		#used-letters-container .card,
+		#tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
+
+		#used-letters { word-wrap: break-word; /* Ensure long lists of letters wrap */ }
+
+		/* Hangman image styling */
+		#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; border-radius: 0.75rem; /* Match card rounding */ padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
+
+		#hangman-image { max-height: 350px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
+
+		/* Dynamic Message Area */
+		#big-user-message-div { min-height: 50px; /* Give it some base height */ display: flex; align-items: center; justify-content: center; }
+
+		/* Glowing Effects - Adjusted colors for better contrast */
+		.glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
+		.glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
+
+		@@keyframes glowGreenBorder { 0%
+		{ border-color: #ced4da; /* Bootstrap default border */ box-shadow: none; }
+		50% { border-color: #28a745; /* Bootstrap success green */ box-shadow: 0 0 25px rgba(40, 167, 69, 0.7); /* Green glow */ }
+		100% { border-color: #ced4da; box-shadow: none; }
 		}
-    /* glowing effect */
-    .glowGreen {
-      animation: glowGreenBorder 2s ease-in-out forwards;
-    }
-		.glowRed {
-      animation: glowRedBorder 2s ease-in-out forwards;
-    }
 
-    @@keyframes glowGreenBorder {
-      0% {
-        border-color: #ccc;
-        box-shadow: none;
-      }
-      50% {
-        border-color: #09e841;
-        box-shadow: 0 0 20px #09e841;
-      }
-      100% {
-        border-color: #ccc;
-        box-shadow: none;
-      }
-    }
+		@@keyframes glowRedBorder { 0%
+		{ border-color: #ced4da; box-shadow: none; }
+		50% { border-color: #dc3545; /* Bootstrap danger red */ box-shadow: 0 0 25px rgba(220, 53, 69, 0.7); /* Red glow */ }
+		100% { border-color: #ced4da; box-shadow: none; }
+		}
 
-		 @@keyframes glowRedBorder {
-      0% {
-        border-color: #ccc;
-        box-shadow: none;
-      }
-      50% {
-        border-color: #e80909;
-        box-shadow: 0 0 20px #e80909;
-      }
-      100% {
-        border-color: #ccc;
-        box-shadow: none;
-      }
-    }
+		/* Optional: Custom scrollbar for better look if left-container overflows */
+		.left-container { /* Removed max-height/overflow-y from original, re-evaluate if needed */ /* max-height: 100vh; */ /* overflow-y: auto; */ /* Add custom scrollbar if needed, e.g., for Webkit browsers: */ /* &::-webkit-scrollbar { width: 8px; } */ /* &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb:hover { background: #555; } */ }
+
+		/* Specific adjustments for smaller screens */
+		@@media (max-width: 767.98px) { .card-body.p-md-5
+		{ padding: 1.5rem !important; /* Less padding on small screens */ }
+		.input-group .form-control-lg,
+		.input-group .btn-lg { height: calc(2.8rem + 2px); /* Slightly smaller inputs/buttons on mobile */ font-size: 1rem; }
+		h1 { font-size: 2rem; /* Smaller title */ }
+		.fs-5 { font-size: 1.1rem !important; /* Adjust label size */ }
+		.fs-1 { font-size: 2.5rem !important; /* Adjust word progress size */ }
+		.fs-4 { font-size: 1.2rem !important; /* Adjust other text sizes */ }
+		}
 	</style>
-		
 }
 
 @section scripts {
@@ -138,7 +185,7 @@
 			$("#secret-word-container").removeClass("d-flex").hide();
 			$("#guess-container").addClass("d-flex").removeClass("d-none");
 			$("#used-letters-container").removeClass("d-none");
-			$("#tries-counter").removeClass("d-none");
+			$("#tries-counter-parent").removeClass("d-none");
 			// Add word progress container
 			let $wordProgressContainer = $("#word-progress-container");
 			secretArray.forEach((secretLetter, index) => {
@@ -151,7 +198,10 @@
 		{
 			if (matchArray.length > 0)
 			{
-				$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success' style='display:none'><h3>Good job!</h3></span>");
+				if ($("#goodMessage").length == 0)
+				{
+					$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success' style='display:none'><h3>Good job!</h3></span>");
+				}
 				glowDiv("word-progress-container", "green");
 				$("#goodMessage").stop(true, true)         // reset any running animation
 												.fadeIn(400)              // fade in over 0.4s
@@ -191,7 +241,7 @@
 				$("#user-messages").append("<span class='text-danger'>No secret word chosen yet!</span>");
 				return;
 			}
-			letter = letter.trim();
+			letter = letter.trim().toLowerCase();
 			$("#user-messages").empty();
 			$("#used-letters").append(letter);
 			$("#guess-input").val("");
@@ -219,7 +269,11 @@
 			}
 			else
 			{
-				$("#big-user-message-div").empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
+				if ($("#badMessage").length == 0)
+				{
+					$("#big-user-message-div").empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
+				}
+			
 				glowDiv("tries-counter", "red");
 				$("#badMessage").stop(true, true)         // reset any running animation
 												.fadeIn(400)              // fade in over 0.4s
