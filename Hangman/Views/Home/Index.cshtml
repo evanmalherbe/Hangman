@@ -158,11 +158,13 @@
 		let secretWord = "";
 		let secretArray = [];
 		let failedTriesCount = 0;
+		let isWon = false;
+		let isLost = false;
 
 		$(document).ready(async function ()
 		{
 			$(document).attr("title", pageTitle);
-			
+			showWonMessage();
 		});
 		 function glowDiv(divId, colour) 
 		 {
@@ -189,7 +191,7 @@
 			// Add word progress container
 			let $wordProgressContainer = $("#word-progress-container");
 			secretArray.forEach((secretLetter, index) => {
-				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
+				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 			});
 
 			$("#hangman-image").attr("src","hangman-0.png");
@@ -227,7 +229,43 @@
 						$(`#letter-match-${letterIndex}`).show();
 					});
 				}
+				if (matchedLettersIndexArray.length == secretArray.length)
+				{
+					debugger;
+					isWon = true;
+					showWonMessage();
+					resetGame();
+				}
 			}
+		}
+		function resetGame()
+		{
+			// reset variables
+			isWon = false;
+			isLost = false;
+			secretWord = "";
+			secretArray = [];
+			failedTriesCount = 0;
+
+			// Clear fields
+			$("#big-user-message-div").empty()
+			//$(`#letter-dash-${letterIndex}`).hide();
+			$("#secret-word-input").val("");
+			$("#user-messages").empty();
+			$("#used-letters").empty();
+			$("#guess-input").val("");
+			$("#badMessage").empty();
+			$("#hangman-image").attr("src","hangman-0.png");
+			$(".letter-match").empty().hide();
+			$(".letter-dash").hide();
+		}
+		function showWonMessage()
+		{
+				Swal.fire({
+					title: "You WIN!",
+					text: "Well done for guessing the word",
+					icon: "success"
+				});
 		}
 		function letterGuess()
 		{
