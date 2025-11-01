@@ -162,13 +162,14 @@
 		let isWon = false;
 		let isLost = false;
 		let matchedLettersArray = [];
-		let matchCount = 0;
 		let matchingLettersArray = [];
+		let usedLettersArray = [];
 
 		$(document).ready(async function ()
 		{
 			$(document).attr("title", pageTitle);
 			//showWonMessage();
+			//showLostMessage();
 		});
 		function resetGame()
 		{
@@ -181,6 +182,7 @@
 			matchedLettersArray = [];
 			matchCount = 0;
 			matchingLettersArray = [];
+			usedLettersArray = [];
 
 			// Clear fields
 			$("#big-user-message-div").empty()
@@ -242,14 +244,7 @@
 			secretArray = secretWord.split("");
 			// Hide secret word entry and show guess entry and other stats
 			hideContainers("hide");
-		
-			// $("#secret-word-container").removeClass("d-flex").hide();
-			// $("#guess-container").addClass("d-flex").removeClass("d-none");
-			// $wordProgressContainer.addClass("d-flex").removeClass("d-none");
-			// $("#used-letters-container").removeClass("d-none");
-			// $("#tries-counter-parent").removeClass("d-none");
-			// Add word progress container
-			
+	
 			secretArray.forEach((secretLetter, index) => {
 				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 			});
@@ -260,6 +255,7 @@
 		{
 			if (matchArray.length > 0)
 			{
+				// Show user message
 				if ($("#goodMessage").length == 0)
 				{
 					$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success' style='display:none'><h3>Good job!</h3></span>");
@@ -270,6 +266,7 @@
 												.delay(2000)              // stay visible for 2s
 												.fadeOut(600); 
 				
+				
 				let matchedLettersIndexArray = [];
 				matchArray.forEach((guessedLetter, index) => 
 				{
@@ -278,11 +275,15 @@
 						if (secretLetter === guessedLetter)
 						{
 							matchedLettersIndexArray.push(index);
-							matchedLettersArray.push(secretLetter);
+							if (!matchedLettersArray.includes(guessedLetter))
+							{
+								matchedLettersArray.push(guessedLetter);
+							}
 						}
 					});
 				});
 
+				// Show correcly guessed letter/s in matched letters section
 				if (matchedLettersIndexArray.length > 0)
 				{
 					matchedLettersIndexArray.forEach((letterIndex, index) => 
@@ -294,7 +295,6 @@
 				// All guessed letters match secret word
 				if (matchedLettersArray.length == secretArray.length)
 				{
-					debugger;
 					isWon = true;
 					showWonMessage();
 					resetGame();
@@ -308,6 +308,17 @@
 					title: "You WIN!",
 					text: "Well done for guessing the word",
 					icon: "success"
+				});
+		}
+		function showLostMessage()
+		{
+				Swal.fire({
+					title: "You LOSE!",
+					text: "Better luck next time...",
+					imageUrl: "hangman-banner.png",
+					imageWidth: 500,
+					imageHeight: 287,
+					imageAlt: "Hangman banner image"
 				});
 		}
 		function letterGuess()
@@ -326,9 +337,14 @@
 			$("#user-messages").empty();
 			$("#guess-input").val("");
 			let isMatch = false;
-			let isUsedLetter = false;
 			let $usedLettersElement = $("#used-letters");
-			let usedLettersArray = [];
+			let $bigUserMessageDiv = $("#big-user-message-div");
+			if (!usedLettersArray.includes(letter))
+			{
+				usedLettersArray.push(letter);
+				$usedLettersElement.append(letter);
+			}
+			let matchCount = 0;
 
 			secretArray.forEach((secretLetter, index) => 
 			{
@@ -344,39 +360,31 @@
 						matchCount++;
 						matchingLettersArray.push(letter);
 						isMatch = true;
-						let usedLetters = $usedLettersElement.val();
-						if (!usedLetters.includes(letter))
-						{
-							$usedLettersElement.append(letter);
-						}
 					}
-					else if (matchingLettersArray.includes(letter))
+					else
 					{
-						// already matched this letter before
-						isUsedLetter = true
-					}
-				}
-				else
-				{
-					// non matching letter
-					let usedLetters = $usedLettersElement.val();
-					if (!usedLetters.includes(letter))
-					{
-						$usedLettersElement.append(letter);
+						// it's a match, but user has already suggested this letter
+						isMatch = true;
 					}
 				}
 			});
+
 			if (matchCount > 0 && isMatch)
 			{
-				debugger;
-				
 				processMatchingLetters(matchingLettersArray);
 			}
-			else if (!isUsedLetter)
+			else if (matchCount == 0 && isMatch)
+			{
+				if ($("#duplicateMessage").length == 0)
+				{
+					$bigUserMessageDiv.empty().append("<span class='text-success' id='duplicateMessage' style='display:flex'><h3>Already tried this letter!</h3></span>");
+				}
+			}
+			else
 			{
 				if ($("#badMessage").length == 0)
 				{
-					$("#big-user-message-div").empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
+					$bigUserMessageDiv.empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
 				}
 			
 				glowDiv("tries-counter", "red");
@@ -386,15 +394,26 @@
 												.fadeOut(600); 
 				failedTriesCount++;
 				showRelevantImage();
+				if (failedTriesCount == 11)
+				{
+					showLostMessage();
+					resetGame();
+				}
 			}
 		}
 		function showRelevantImage()
 		{
-			if (failedTriesCount > 0 && failedTriesCount < 12)
+			let imageToShow = "";
+			if (failedTriesCount > 0 && failedTriesCount < 11)
 			{
-				$("#hangman-image").attr("src",`hangman-${failedTriesCount}.png`);
-				$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
+				imageToShow = `hangman-${failedTriesCount}.png`;
 			}
+			if (failedTriesCount == 11)
+			{
+				imageToShow = `hangman-final.png`;
+			}
+			$("#hangman-image").attr("src", imageToShow);
+			$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
 		}
 		</script>
 	}
