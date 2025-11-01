@@ -39,7 +39,7 @@
 							</div>
 
 							<!-- Word Progress -->
-							<div id="word-progress-container" class="mt-4 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace">
+							<div id="word-progress-container" class="d-none mt-4 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace">
 								<!-- Example: _ _ _ _ -->
 							</div>
 
@@ -63,11 +63,12 @@
 
 						<!-- Right Column: Hangman Graphic & Big Message -->
 						<div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
-							<div id="hangman-graphic-container" class="p-3 bg-white border rounded shadow-sm mb-4" style="max-width: 300px;">
-								<img id="hangman-image" src="hangman-final.png" class="img-fluid" alt="Hangman Progress">
-							</div>
 							<div id="big-user-message-div" class="text-center mt-auto p-3 fs-4 fw-semibold text-danger">
 								<!-- e.g., "You Lose!" or "You Win!" -->
+								&nbsp;
+							</div>
+							<div id="hangman-graphic-container" class="p-3 bg-white border rounded shadow-sm mb-4" style="max-width: 300px;">
+								<img id="hangman-image" src="hangman-final.png" class="img-fluid" alt="Hangman Progress">
 							</div>
 						</div>
 					</div>
@@ -160,12 +161,42 @@
 		let failedTriesCount = 0;
 		let isWon = false;
 		let isLost = false;
+		let matchedLettersArray = [];
+		let matchCount = 0;
+		let matchingLettersArray = [];
 
 		$(document).ready(async function ()
 		{
 			$(document).attr("title", pageTitle);
-			showWonMessage();
+			//showWonMessage();
 		});
+		function resetGame()
+		{
+			// reset variables
+			isWon = false;
+			isLost = false;
+			secretWord = "";
+			secretArray = [];
+			failedTriesCount = 0;
+			matchedLettersArray = [];
+			matchCount = 0;
+			matchingLettersArray = [];
+
+			// Clear fields
+			$("#big-user-message-div").empty()
+			//$(`#letter-dash-${letterIndex}`).hide();
+			$("#secret-word-input").val("");
+			$("#user-messages").empty();
+			$("#used-letters").empty();
+			$("#guess-input").val("");
+			$("#badMessage").empty();
+			$("#hangman-image").attr("src","hangman-0.png");
+			$(".letter-match").empty().hide();
+			$(".letter-dash").hide();
+			$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
+
+			hideContainers("show");
+		}
 		 function glowDiv(divId, colour) 
 		 {
 			let glowColour = colour === "green" ? "glowGreen" : "glowRed";
@@ -174,8 +205,34 @@
       void div.offsetWidth; // trick to restart animation
       div.classList.add(glowColour);
     }
+		function hideContainers(input)
+		{
+			if (input === "" || input === undefined)
+			{
+				return;
+			}
+			if (input === "hide")
+			{
+				// Hide secret word entry and show guess entry and other stats
+				$("#secret-word-container").removeClass("d-flex").hide();
+				$("#guess-container").addClass("d-flex").removeClass("d-none");
+				$("#word-progress-container").addClass("d-flex").removeClass("d-none");
+				$("#used-letters-container").removeClass("d-none");
+				$("#tries-counter-parent").removeClass("d-none");
+			}
+			else
+			{
+				// show
+				$("#secret-word-container").removeClass("d-none").show();
+				$("#guess-container").addClass("d-none").removeClass("d-flex");
+				$("#word-progress-container").empty().addClass("d-none").removeClass("d-flex");
+				$("#used-letters-container").addClass("d-none").removeClass("d-flex");
+				$("#tries-counter-parent").addClass("d-none").removeClass("d-flex");
+			}
+		}
 		function saveWord()
 		{
+			let $wordProgressContainer = $("#word-progress-container");
 			let word = $("#secret-word-input").val();
 			if (word == "")
 			{
@@ -184,12 +241,15 @@
 			secretWord = word.trim().toLowerCase();
 			secretArray = secretWord.split("");
 			// Hide secret word entry and show guess entry and other stats
-			$("#secret-word-container").removeClass("d-flex").hide();
-			$("#guess-container").addClass("d-flex").removeClass("d-none");
-			$("#used-letters-container").removeClass("d-none");
-			$("#tries-counter-parent").removeClass("d-none");
+			hideContainers("hide");
+		
+			// $("#secret-word-container").removeClass("d-flex").hide();
+			// $("#guess-container").addClass("d-flex").removeClass("d-none");
+			// $wordProgressContainer.addClass("d-flex").removeClass("d-none");
+			// $("#used-letters-container").removeClass("d-none");
+			// $("#tries-counter-parent").removeClass("d-none");
 			// Add word progress container
-			let $wordProgressContainer = $("#word-progress-container");
+			
 			secretArray.forEach((secretLetter, index) => {
 				$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 			});
@@ -209,6 +269,7 @@
 												.fadeIn(400)              // fade in over 0.4s
 												.delay(2000)              // stay visible for 2s
 												.fadeOut(600); 
+				
 				let matchedLettersIndexArray = [];
 				matchArray.forEach((guessedLetter, index) => 
 				{
@@ -217,6 +278,7 @@
 						if (secretLetter === guessedLetter)
 						{
 							matchedLettersIndexArray.push(index);
+							matchedLettersArray.push(secretLetter);
 						}
 					});
 				});
@@ -229,7 +291,8 @@
 						$(`#letter-match-${letterIndex}`).show();
 					});
 				}
-				if (matchedLettersIndexArray.length == secretArray.length)
+				// All guessed letters match secret word
+				if (matchedLettersArray.length == secretArray.length)
 				{
 					debugger;
 					isWon = true;
@@ -238,27 +301,7 @@
 				}
 			}
 		}
-		function resetGame()
-		{
-			// reset variables
-			isWon = false;
-			isLost = false;
-			secretWord = "";
-			secretArray = [];
-			failedTriesCount = 0;
-
-			// Clear fields
-			$("#big-user-message-div").empty()
-			//$(`#letter-dash-${letterIndex}`).hide();
-			$("#secret-word-input").val("");
-			$("#user-messages").empty();
-			$("#used-letters").empty();
-			$("#guess-input").val("");
-			$("#badMessage").empty();
-			$("#hangman-image").attr("src","hangman-0.png");
-			$(".letter-match").empty().hide();
-			$(".letter-dash").hide();
-		}
+		
 		function showWonMessage()
 		{
 				Swal.fire({
@@ -281,11 +324,12 @@
 			}
 			letter = letter.trim().toLowerCase();
 			$("#user-messages").empty();
-			$("#used-letters").append(letter);
 			$("#guess-input").val("");
-		
-			let matchCount = 0;
-			let matchingLettersArray = [];
+			let isMatch = false;
+			let isUsedLetter = false;
+			let $usedLettersElement = $("#used-letters");
+			let usedLettersArray = [];
+
 			secretArray.forEach((secretLetter, index) => 
 			{
 				if (secretLetter === "" || secretLetter === " ")
@@ -294,18 +338,41 @@
 				}
 				if (secretLetter === letter)
 				{
+					// new matching letter
 					if (!matchingLettersArray.includes(letter))
 					{
 						matchCount++;
 						matchingLettersArray.push(letter);
+						isMatch = true;
+						let usedLetters = $usedLettersElement.val();
+						if (!usedLetters.includes(letter))
+						{
+							$usedLettersElement.append(letter);
+						}
+					}
+					else if (matchingLettersArray.includes(letter))
+					{
+						// already matched this letter before
+						isUsedLetter = true
+					}
+				}
+				else
+				{
+					// non matching letter
+					let usedLetters = $usedLettersElement.val();
+					if (!usedLetters.includes(letter))
+					{
+						$usedLettersElement.append(letter);
 					}
 				}
 			});
-			if (matchCount > 0)
+			if (matchCount > 0 && isMatch)
 			{
+				debugger;
+				
 				processMatchingLetters(matchingLettersArray);
 			}
-			else
+			else if (!isUsedLetter)
 			{
 				if ($("#badMessage").length == 0)
 				{
