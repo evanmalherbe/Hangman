@@ -6,7 +6,7 @@
 	int wordLength = secretWord.Length;
 }
 
-<div class=" py-4 bg-light min-vh-100">
+<div class="py-4 bg-light min-vh-100">
 	<div class="row justify-content-center m-0">
 		<div class="col-lg-11 col-xl-10">
 			<div class="card shadow-lg border-0 rounded-4">
@@ -32,11 +32,10 @@
 							</div> *@
 
 							<!-- Guessing Interface (initially hidden) -->
-							<div id="guess-container" class="mb-2 p-3 bg-white">
-								<label for="guess-input" class="form-label fs-5">Guess a letter:</label>
+							<div id="guess-container" class="mb-2 p-2 px-0 bg-white">
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
-									<button type="button" class="btn btn-success btn-lg" onclick="letterGuess()">Guess Letter</button>
+									<button type="button" class="btn btn-success btn-lg" onclick="letterGuess()">Guess letter</button>
 								</div>
 							</div>
 
@@ -47,9 +46,9 @@
 							<div id="word-length-message" class="text-muted"><span class="">Note: This secret word is @wordLength letters long</span></div>
 
 							<!-- Used Letters & Tries Counter -->
-							<div class="row mt-auto g-3">
+							<div class="row mt-2 g-3">
 								<div id="used-letters-container" class="col-md-6 d-none">
-									<div class="card card-body bg-light border-secondary">
+									<div class="card card-body bg-light">
 										<h5 class="card-title text-secondary mb-2">Used Letters</h5>
 										<p id="used-letters" class="mb-0 fs-4 fw-bold text-muted text-uppercase"></p>
 									</div>
@@ -70,7 +69,7 @@
 								<!-- e.g., "You Lose!" or "You Win!" -->
 								&nbsp;
 							</div>
-							<div id="hangman-graphic-container" class="p-3 bg-white border rounded shadow-sm mb-4" style="max-width: 300px;">
+							<div id="hangman-graphic-container" class="p-3 bg-white shadow-sm mb-4" style="max-width: 300px;">
 								<img id="hangman-image" src="hangman-final.png" class="img-fluid" alt="Hangman Progress">
 							</div>
 						</div>
