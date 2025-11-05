@@ -121,7 +121,7 @@ namespace Hangman.Controllers
 		{
 			List<string> list = _wordList.ToList(); // 100 words
 			Random random = new Random();
-			int randomIndex = random.Next(100);
+			int randomIndex = random.Next(1,101);
 			model.SecretWord = list[randomIndex - 1];
 
 			return View(model);

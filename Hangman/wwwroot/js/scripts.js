@@ -2,6 +2,7 @@
 const pageTitle = "Hangman game";
 let secretWord = "";
 let secretArray = [];
+let availableTries = 11;
 let failedTriesCount = 0;
 let isWon = false;
 let isLost = false;
@@ -39,7 +40,7 @@ function resetGame()
 	$("#hangman-image").attr("src", "hangman-0.png");
 	$(".letter-match").empty().hide();
 	$(".letter-dash").hide();
-	$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
+	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
 
 	hideContainers("show");
 }
@@ -250,14 +251,14 @@ function letterGuess()
 function showRelevantImage()
 {
 	let imageToShow = "";
-	if (failedTriesCount > 0 && failedTriesCount < 11)
+	if (failedTriesCount > 0 && failedTriesCount < availableTries)
 	{
 		imageToShow = `hangman-${failedTriesCount}.png`;
 	}
-	if (failedTriesCount == 11)
+	if (failedTriesCount == availableTries)
 	{
 		imageToShow = `hangman-final.png`;
 	}
 	$("#hangman-image").attr("src", imageToShow);
-	$("#tries-count-message").empty().append(`${failedTriesCount} <strong>out of 11</strong>`);
+	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
 }

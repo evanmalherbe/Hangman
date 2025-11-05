@@ -1,19 +1,18 @@
 ﻿@*Hangman home page*@
-
 @model Hangman.ViewModel.HomeViewModel
 
 @{
 	string secretWord = Model?.SecretWord ?? "";
 }
 
-<div class="container-fluid py-4 bg-light min-vh-100">
+<div class=" py-4 bg-light min-vh-100">
 	<div class="row justify-content-center m-0">
 		<div class="col-lg-11 col-xl-10">
 			<div class="card shadow-lg border-0 rounded-4">
-				<div class="card-header bg-gradient text-white text-center p-4 rounded-top-4" style="background-color: #007bff; background-image: linear-gradient(135deg, #007bff 0%, #0056b3 100%);">
+				<div class="card-header bg-gradient text-white text-center p-2 rounded-top-4" style="background-color: #007bff; background-image: linear-gradient(135deg, #007bff 0%, #0056b3 100%);">
 					<h1 class="mb-0 fw-bold">Hangman Game</h1>
 				</div>
-				<div class="card-body p-4 p-md-5">
+				<div class="card-body p-4 p-md-3">
 					<div id="user-messages" class="mb-4">
 						<!-- Dynamic user messages will appear here, e.g., Bootstrap alerts -->
 					</div>
@@ -23,7 +22,7 @@
 						<div class="col-md-7 d-flex flex-column">
 
 							<!-- Secret Word Entry -->
-							<div id="secret-word-container" class="d-none mb-4 p-3 border rounded-3 bg-white">
+							<div id="secret-word-container" class="d-none mb-2 p-3 border rounded-3 bg-white">
 								<label for="secret-word-input" class="form-label fs-5">Enter the secret word to be guessed:</label>
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="secret-word-input" placeholder="Your word..." aria-label="Secret word input">
@@ -32,7 +31,7 @@
 							</div>
 
 							<!-- Guessing Interface (initially hidden) -->
-							<div id="guess-container" class="mb-4 p-3 border rounded-3 bg-white">
+							<div id="guess-container" class="mb-2 p-3 bg-white">
 								<label for="guess-input" class="form-label fs-5">Guess a letter:</label>
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
@@ -54,7 +53,7 @@
 									</div>
 								</div>
 								<div id="tries-counter-parent" class="col-md-6 d-none">
-									<div id="tries-counter"  class="card card-body bg-light border-secondary rounded-3 bg-white">
+									<div id="tries-counter" class="card card-body bg-light border-secondary rounded-3 bg-white">
 										<h5 class="card-title text-secondary mb-2">Your Tries</h5>
 										<span id="tries-count-message" class="fs-4 fw-bold text-primary"><strong>0 out of 11</strong></span>
 									</div>
