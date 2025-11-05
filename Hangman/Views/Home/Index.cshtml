@@ -80,10 +80,15 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	$(document).ready(async function ()
-	{
-		secretWord = @secretWord;
+@section scripts {
 
-	});
+	<script type="text/javascript">
+		$(document).ready(async function ()
+		{
+			$(document).attr("title", "Hangman Game");
+			secretWord = '@secretWord';
+			saveWord();
+		});
 	</script>
+}
+

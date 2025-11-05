@@ -79,12 +79,13 @@ function hideContainers(input)
 function saveWord()
 {
 	let $wordProgressContainer = $("#word-progress-container");
-	let word = $("#secret-word-input").val();
-	if (word == "")
-	{
-		return;
-	}
-	secretWord = word.trim().toLowerCase();
+	//let word = $("#secret-word-input").val();
+	//if (word == "")
+	//{
+	//	return;
+	//}
+	//secretWord = word.trim().toLowerCase();
+	
 	secretArray = secretWord.split("");
 	// Hide secret word entry and show guess entry and other stats
 	hideContainers("hide");
