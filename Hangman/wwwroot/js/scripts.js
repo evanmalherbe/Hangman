@@ -259,6 +259,7 @@ function showRelevantImage()
 	{
 		imageToShow = `hangman-final.png`;
 	}
+	debugger;
 	$("#hangman-image").attr("src", imageToShow);
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
 }
