@@ -23,7 +23,7 @@
 						<div class="col-md-7 d-flex flex-column">
 
 							<!-- Secret Word Entry -->
-							<div id="secret-word-container" class="mb-4 p-3 border rounded-3 bg-white">
+							<div id="secret-word-container" class="d-none mb-4 p-3 border rounded-3 bg-white">
 								<label for="secret-word-input" class="form-label fs-5">Enter the secret word to be guessed:</label>
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="secret-word-input" placeholder="Your word..." aria-label="Secret word input">
@@ -32,7 +32,7 @@
 							</div>
 
 							<!-- Guessing Interface (initially hidden) -->
-							<div id="guess-container" class="d-none mb-4 p-3 border rounded-3 bg-white">
+							<div id="guess-container" class="mb-4 p-3 border rounded-3 bg-white">
 								<label for="guess-input" class="form-label fs-5">Guess a letter:</label>
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
