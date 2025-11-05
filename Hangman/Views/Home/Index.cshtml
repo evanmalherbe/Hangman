@@ -1,7 +1,9 @@
 ﻿@*Hangman home page*@
 
-@{
+@model Hangman.ViewModel.HomeViewModel
 
+@{
+	string secretWord = Model?.SecretWord ?? "";
 }
 
 <div class="container-fluid py-4 bg-light min-vh-100">
@@ -77,3 +79,11 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(async function ()
+	{
+		secretWord = @secretWord;
+
+	});
+	</script>

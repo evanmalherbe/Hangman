@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Hangman.Models;
+using Hangman.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hangman.Controllers
@@ -116,11 +117,14 @@ namespace Hangman.Controllers
 			_logger = logger;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(HomeViewModel model)
 		{
-			List<string> list = _wordList.ToList();
+			List<string> list = _wordList.ToList(); // 100 words
+			Random random = new Random();
+			int randomIndex = random.Next(100);
+			model.SecretWord = list[randomIndex - 1];
 
-			return View();
+			return View(model);
 		}
 
 		public IActionResult Privacy()
