@@ -1,22 +1,58 @@
-html {
-  font-size: 14px;
-}
+html { font-size: 14px; }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+	html { font-size: 16px; }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus { box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb; }
+html { position: relative; min-height: 100%; }
+/* General Body / Background */
+body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+/* Main container adjustments for a central, framed look */
+.container-fluid { /* Already full-width, py-4 adds vertical padding, min-vh-100 makes sure it takes full viewport height */ }
+/* Card Styling - Bootstrap takes care of much of this, but we reinforce it */
+.card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Stronger, more modern shadow */ border-radius: 1rem !important; /* Rounded corners */ }
+/* Card Header for a gradient effect */
+.card-header { border-bottom: none; /* Remove default border */ }
+/* Input and Button sizing for a bolder feel */
+.input-group .form-control-lg,
+.input-group .btn-lg { height: calc(3.5rem + 2px); /* Larger input and button height */ }
+/* Word Progress container for clear display */
+#word-progress-container { min-height: 80px; /* Ensure it has some height even if empty */ display: flex; /* Use flexbox for better centering */ align-items: center; justify-content: center; letter-spacing: 0.5rem; /* Space out the letters */ background-color: #e9ecef; /* Slightly darker background for emphasis */ color: #343a40; /* Darker text */ border: 1px dashed #adb5bd !important; /* Dashed border for a hint of playfulness */ }
+/* Used Letters and Tries Counter - styling their internal cards */
+#used-letters-container .card,
+#tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
+#used-letters { word-wrap: break-word; /* Ensure long lists of letters wrap */ }
+/* Hangman image styling */
+#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; border-radius: 0.75rem; /* Match card rounding */ padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
+#hangman-image { max-height: 350px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
+/* Dynamic Message Area */
+#big-user-message-div { min-height: 50px; /* Give it some base height */ display: flex; align-items: center; justify-content: center; }
+/* Glowing Effects - Adjusted colors for better contrast */
+.glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
+.glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
+
+@keyframes glowGreenBorder {
+	0% { border-color: #ced4da; /* Bootstrap default border */ box-shadow: none; }
+	50% { border-color: #28a745; /* Bootstrap success green */ box-shadow: 0 0 25px rgba(40, 167, 69, 0.7); /* Green glow */ }
+	100% { border-color: #ced4da; box-shadow: none; }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+@keyframes glowRedBorder {
+	0% { border-color: #ced4da; box-shadow: none; }
+	50% { border-color: #dc3545; /* Bootstrap danger red */ box-shadow: 0 0 25px rgba(220, 53, 69, 0.7); /* Red glow */ }
+	100% { border-color: #ced4da; box-shadow: none; }
 }
 
-body {
-  margin-bottom: 60px;
+/* Optional: Custom scrollbar for better look if left-container overflows */
+.left-container { /* Removed max-height/overflow-y from original, re-evaluate if needed */ /* max-height: 100vh; */ /* overflow-y: auto; */ /* Add custom scrollbar if needed, e.g., for Webkit browsers: */ /* &::-webkit-scrollbar { width: 8px; } */ /* &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb:hover { background: #555; } */ }
+/* Specific adjustments for smaller screens */
+@media (max-width: 767.98px) {
+	.card-body.p-md-5 { padding: 1.5rem !important; /* Less padding on small screens */ }
+	.input-group .form-control-lg,
+	.input-group .btn-lg { height: calc(2.8rem + 2px); /* Slightly smaller inputs/buttons on mobile */ font-size: 1rem; }
+	h1 { font-size: 2rem; /* Smaller title */ }
+	.fs-5 { font-size: 1.1rem !important; /* Adjust label size */ }
+	.fs-1 { font-size: 2.5rem !important; /* Adjust word progress size */ }
+	.fs-4 { font-size: 1.2rem !important; /* Adjust other text sizes */ }
 }
