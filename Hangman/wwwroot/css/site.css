@@ -10,8 +10,7 @@ html { position: relative; min-height: 100%; }
 body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
 /* Main container adjustments for a central, framed look */
 .container-fluid { /* Already full-width, py-4 adds vertical padding, min-vh-100 makes sure it takes full viewport height */ }
-/* Card Styling - Bootstrap takes care of much of this, but we reinforce it */
-.card { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Stronger, more modern shadow */ border-radius: 1rem !important; /* Rounded corners */ }
+.card {border-radius: 0px;}
 /* Card Header for a gradient effect */
 .card-header { border-bottom: none; /* Remove default border */ }
 /* Input and Button sizing for a bolder feel */
@@ -24,7 +23,7 @@ body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background 
 #tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
 #used-letters { word-wrap: break-word; /* Ensure long lists of letters wrap */ }
 /* Hangman image styling */
-#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; border-radius: 0.75rem; /* Match card rounding */ padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
+#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
 #hangman-image { max-height: 350px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
 /* Dynamic Message Area */
 #big-user-message-div { min-height: 50px; /* Give it some base height */ display: flex; align-items: center; justify-content: center; }
