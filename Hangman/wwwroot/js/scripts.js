@@ -2,7 +2,7 @@
 const pageTitle = "Hangman game";
 let secretWord = "";
 let secretArray = [];
-let availableTries = 11;
+let availableTries = 3;
 let failedTriesCount = 0;
 let isWon = false;
 let isLost = false;
@@ -13,8 +13,6 @@ let usedLettersArray = [];
 $(document).ready(async function ()
 {
 	$(document).attr("title", pageTitle);
-	//showWonMessage();
-	//showLostMessage();
 });
 function resetGame()
 {
@@ -37,7 +35,7 @@ function resetGame()
 	$("#used-letters").empty();
 	$("#guess-input").val("");
 	$("#badMessage").empty();
-	$("#hangman-image").attr("src", "hangman-0.png");
+	$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-0.png");
 	$(".letter-match").empty().hide();
 	$(".letter-dash").hide();
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
@@ -89,7 +87,7 @@ function saveWord()
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 	});
 
-	$("#hangman-image").attr("src", "hangman-fade.png");
+	$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
 }
 async function processMatchingLetters(matchArray, userMessage)
 {
@@ -116,9 +114,17 @@ async function processMatchingLetters(matchArray, userMessage)
 				if (secretLetter === guessedLetter)
 				{
 					matchedLettersIndexArray.push(index);
-					if (!matchedLettersArray.includes(guessedLetter))
+					// check how many times correctly guessed letter appears in secret word
+					let numberOfTimes = secretArray.filter(i => i == guessedLetter).length;
+					
+					for (let i = 0; i <= numberOfTimes; i++)
 					{
-						matchedLettersArray.push(guessedLetter);
+						// check how many times this letter has been added to "matched letters array" already
+						let timesLetterAppearsInArray = matchedLettersArray.filter(i => i == guessedLetter).length;
+						if (timesLetterAppearsInArray !== numberOfTimes)
+						{
+							matchedLettersArray.push(guessedLetter);
+						}
 					}
 				}
 			});
@@ -147,16 +153,19 @@ function showWonMessage()
 {
 	Swal.fire({
 		title: "You WIN!",
-		text: "Well done for guessing the word",
-		icon: "success"
+		html: `The secret word was:<br/> <h2>${secretWord}<h2>`,
+		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-win-colour.png",
+		imageWidth: 500,
+		imageHeight: 287,
+		imageAlt: "Hangman winner image"
 	});
 }
 function showLostMessage()
 {
 	Swal.fire({
 		title: "You LOSE!",
-		text: "Better luck next time...",
-		imageUrl: "hangman-banner.png",
+		html: `The secret word was:<br/> <h2>${secretWord}<h2>`,
+		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-banner.png",
 		imageWidth: 500,
 		imageHeight: 287,
 		imageAlt: "Hangman banner image"
@@ -251,7 +260,7 @@ async function letterGuess()
 
 			failedTriesCount++;
 			showRelevantImage();
-			if (failedTriesCount == 11)
+			if (failedTriesCount == availableTries)
 			{
 				showLostMessage();
 				resetGame();
@@ -273,11 +282,11 @@ function showRelevantImage()
 	let imageToShow = "";
 	if (failedTriesCount > 0 && failedTriesCount < availableTries)
 	{
-		imageToShow = `hangman-${failedTriesCount}.png`;
+		imageToShow = `https://imagestore-production.up.railway.app/images/hangman/hangman-${failedTriesCount}.png`;
 	}
 	if (failedTriesCount == availableTries)
 	{
-		imageToShow = `hangman-final.png`;
+		imageToShow = `https://imagestore-production.up.railway.app/images/hangman/hangman-final.png`;
 	}
 	$("#hangman-image").attr("src", imageToShow);
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
