@@ -97,7 +97,7 @@ async function processMatchingLetters(matchArray, userMessage)
 	{
 		// Show user message
 		userMessage.empty().append("<h3>Good job!</h3>").removeClass("text-danger").addClass("text-success");
-		await delay(3000);
+		await delay(2000);
 		userMessage.empty().append("<h3>&nbsp;</h3>");
 	
 		/*$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success'><h3>Good job!</h3></span>");*/
@@ -168,7 +168,7 @@ async function alreadyTriedThisLetter(userMessage)
 	userMessage.removeClass("text-danger").addClass("text-success");
 	userMessage.empty().append("<h3>Already tried this letter!</h3>");
 	// remove message after delay
-	await delay(3000);
+	await delay(2000);
 	userMessage.empty().append("<h3>&nbsp;</h3>");
 }
 async function letterGuess()
@@ -240,7 +240,7 @@ async function letterGuess()
 			$userMessage.removeClass("text-success").addClass("text-danger");
 			$userMessage.empty().append("<h3>Oh no!</h3>");
 			// remove message after delay
-			await delay(3000);
+			await delay(2000);
 			$userMessage.empty().append("<h3>&nbsp;</h3>");
 
 			glowDiv("tries-counter", "red");

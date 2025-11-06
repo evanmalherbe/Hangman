@@ -23,8 +23,8 @@ body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background 
 #tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
 #used-letters { word-wrap: break-word; /* Ensure long lists of letters wrap */ }
 /* Hangman image styling */
-#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
-#hangman-image { max-height: 350px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
+#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; display: flex; /* Center image */ align-items: center; justify-content: center; }
+#hangman-image { max-height: 400px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
 /* Dynamic Message Area */
 #big-user-message-div { min-height: 50px; display: flex; align-items: center; justify-content: center; }
 /* Glowing Effects - Adjusted colors for better contrast */
