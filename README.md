@@ -1,5 +1,5 @@
 # Hangman
-This little Hangman game is built with .NET Core 8 with MVC architecture and Razor views. Much of the game logic and functionality uses Javascript.<br/> 
+This little Hangman game is built with **.NET Core 8 with MVC architecture** and **Razor** views. Much of the game logic and functionality uses Javascript.<br/> 
 
 ### Technologies
 ![.NET 8](https://img.shields.io/badge/.NET%208-000)
@@ -16,7 +16,7 @@ This little Hangman game is built with .NET Core 8 with MVC architecture and Raz
 - [Credits](#credits)
 
 ## Description
-Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, there are now electronic versions. My version automatically chooses a secret word for the user to guess from a list of 100 words and simply lets the user know the number of letters in the word. <br/><br/>
+Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, there are now electronic versions. My version automatically chooses a secret word for the user to guess from a **list of 100 words** and simply lets the user know the number of letters in the word. See image below.<br/><br/>
 ![Hangman number of letters in secret word screenshot](Hangman/wwwroot/hangman-word-length.png)
 
 ## Rules of Game
@@ -37,7 +37,7 @@ This project is a .NET Core MVC web application. To run it outside of Visual Stu
 5. **Access the application:** Once the application starts, the console output will show the urls where the app is listening. Usually, it will be something like `http://localhost:5000` or `http://localhost:5001`. Open your web browser (E.g. Microsoft Edge, Google Chrome etc) and type that address into your browser address bar to use the calculator.
 
 ## Usage
-Once you open the project in your browser `http://localhost:5000` (or similar), you will see the main game screen. Since the app automatically chooses a secret word from the 100 word list for the user, you can immediately start making guesses by typing a letter into the box and clicking the "Guess letter" button. See figure 1 below.<br/>
+Once you open the project in your browser `http://localhost:5000` (or similar), you will see the main game screen. Since the app automatically chooses a secret word from the 100 word list for the user, you can immediately start making guesses by typing a letter into the box and clicking the **Guess letter** button. See image below.<br/><br/>
 ![Guess a letter - screenshot](Hangman/wwwroot/first-guess.png)
 
 ## Credits
