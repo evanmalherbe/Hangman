@@ -16,7 +16,7 @@ This little Hangman game is built with .NET Core 8 with MVC architecture and Raz
 - [Credits](#credits)
 
 ## Description
-Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, there are now electronic versions. My version automatically chooses a secret word for the user to guess from a list of 100 words and simply lets the user know the number of letters in the word. <br/>
+Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, there are now electronic versions. My version automatically chooses a secret word for the user to guess from a list of 100 words and simply lets the user know the number of letters in the word. <br/><br/>
 ![Hangman number of letters in secret word screenshot](Hangman/wwwroot/hangman-word-length.png)
 
 ## Rules of Game
@@ -28,17 +28,17 @@ The player guessing the word may, at any time, attempt to guess the whole word. 
 This project is a .NET Core MVC web application. To run it outside of Visual Studio, you'll need the **.NET Core SDK** installed on your machine (the version that is compatible with this project - 8.0). 
 
 1. **Get the code (cloning the repository)** - You'll first need to get the code from Github. Follow these steps from your command line interface (CLI), such as Command Prompt, Powershell or Bash:<br/>
-`git clone https://github.com/evanmalherbe/Calculator.git`
+`git clone https://github.com/evanmalherbe/Hangman.git`
 2. **Navigate to project directory** - Now use the `cd` command to move into the directory that contains the project's `.csproj` file.<br/>
-`cd Calculator`
+`cd Hangman`
 3. **Restore dependencies (optional but recommended):** Run the following command to download any necessary packages and dependencies. This is often done automatically, but this makes sure everything is in place.<br/>
 `dotnet restore`
 4. **Run the application:** Execute the project using the `dotnet run` command. <br/>`dotnet run`
 5. **Access the application:** Once the application starts, the console output will show the urls where the app is listening. Usually, it will be something like `http://localhost:5000` or `http://localhost:5001`. Open your web browser (E.g. Microsoft Edge, Google Chrome etc) and type that address into your browser address bar to use the calculator.
 
 ## Usage
-Once you open the project in your browser `http://localhost:5000` (or similar), you will see the calculator with it's familiar layout of buttons. Simply use the number keypad on your keyboard or use your mouse to click the buttons on screen. See figure 1 below.<br/>
-![Calculator screenshot 2](Calculator/wwwroot/images/calculator.png)
+Once you open the project in your browser `http://localhost:5000` (or similar), you will see the main game screen. Since the app automatically chooses a secret word from the 100 word list for the user, you can immediately start making guesses by typing a letter into the box and clicking the "Guess letter" button. See figure 1 below.<br/>
+![Guess a letter - screenshot](Hangman/wwwroot/first-guess.png)
 
 ## Credits
 This project was created by Evan Malherbe - October 2025 - [GitHub profile](https://github.com/evanmalherbe)
