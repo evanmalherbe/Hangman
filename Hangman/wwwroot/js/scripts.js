@@ -80,13 +80,6 @@ function hideContainers(input)
 function saveWord()
 {
 	let $wordProgressContainer = $("#word-progress-container");
-	//let word = $("#secret-word-input").val();
-	//if (word == "")
-	//{
-	//	return;
-	//}
-	//secretWord = word.trim().toLowerCase();
-	
 	secretArray = secretWord.split("");
 	// Hide secret word entry and show guess entry and other stats
 	hideContainers("hide");
@@ -96,23 +89,24 @@ function saveWord()
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 	});
 
-	$("#hangman-image").attr("src", "hangman-0.png");
+	$("#hangman-image").attr("src", "hangman-fade.png");
 }
-function processMatchingLetters(matchArray)
+async function processMatchingLetters(matchArray, userMessage)
 {
 	if (matchArray.length > 0)
 	{
 		// Show user message
-		if ($("#goodMessage").length == 0)
-		{
-			$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success' style='display:none'><h3>Good job!</h3></span>");
-		}
+		userMessage.empty().append("<h3>Good job!</h3>").removeClass("text-danger").addClass("text-success");
+		await delay(3000);
+		userMessage.empty().append("<h3>&nbsp;</h3>");
+	
+		/*$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success'><h3>Good job!</h3></span>");*/
+		
 		glowDiv("word-progress-container", "green");
-		$("#goodMessage").stop(true, true)         // reset any running animation
-			.fadeIn(400)              // fade in over 0.4s
-			.delay(2000)              // stay visible for 2s
-			.fadeOut(600);
-
+		//$("#goodMessage").stop(true, true)         // reset any running animation
+		//	.fadeIn(400)              // fade in over 0.4s
+		//	.delay(2000)              // stay visible for 2s
+		//	.fadeOut(600);
 
 		let matchedLettersIndexArray = [];
 		matchArray.forEach((guessedLetter, index) => 
@@ -168,7 +162,16 @@ function showLostMessage()
 		imageAlt: "Hangman banner image"
 	});
 }
-function letterGuess()
+async function alreadyTriedThisLetter(userMessage)
+{
+	// Already tried this letter
+	userMessage.removeClass("text-danger").addClass("text-success");
+	userMessage.empty().append("<h3>Already tried this letter!</h3>");
+	// remove message after delay
+	await delay(3000);
+	userMessage.empty().append("<h3>&nbsp;</h3>");
+}
+async function letterGuess()
 {
 	let letter = $("#guess-input").val();
 	if (letter === "")
@@ -185,15 +188,11 @@ function letterGuess()
 	$("#guess-input").val("");
 	let isMatch = false;
 	let $usedLettersElement = $("#used-letters");
-	let $bigUserMessageDiv = $("#big-user-message-div");
-	if (!usedLettersArray.includes(letter))
-	{
-		usedLettersArray.push(letter);
-		$usedLettersElement.append(letter);
-	}
+/*	let $bigUserMessageDiv = $("#big-user-message-div");*/
+	let $userMessage = $("#userMessage")
 	let matchCount = 0;
 
-	secretArray.forEach((secretLetter, index) => 
+	secretArray.some((secretLetter, index) => 
 	{
 		if (secretLetter === "" || secretLetter === " ")
 		{
@@ -212,41 +211,62 @@ function letterGuess()
 			{
 				// it's a match, but user has already suggested this letter
 				isMatch = true;
+				return true;
 			}
 		}
+		return false;
 	});
 
 	if (matchCount > 0 && isMatch)
 	{
-		processMatchingLetters(matchingLettersArray);
+		// Good job!
+		await processMatchingLetters(matchingLettersArray, $userMessage);
 	}
 	else if (matchCount == 0 && isMatch)
 	{
-		if ($("#duplicateMessage").length == 0)
-		{
-			$bigUserMessageDiv.empty().append("<span class='text-success' id='duplicateMessage' style='display:flex'><h3>Already tried this letter!</h3></span>");
-		}
+		// Already tried this letter
+		await alreadyTriedThisLetter($userMessage);
 	}
 	else
 	{
-		if ($("#badMessage").length == 0)
+		if (usedLettersArray.includes(letter))
 		{
-			$bigUserMessageDiv.empty().append("<span class='text-danger' id='badMessage' style='display:none'><h3>Oh no!</h3></span>");
+			// Already tried this letter
+			await alreadyTriedThisLetter($userMessage);
 		}
-
-		glowDiv("tries-counter", "red");
-		$("#badMessage").stop(true, true)         // reset any running animation
-			.fadeIn(400)              // fade in over 0.4s
-			.delay(2000)              // stay visible for 2s
-			.fadeOut(600);
-		failedTriesCount++;
-		showRelevantImage();
-		if (failedTriesCount == 11)
+		else
 		{
-			showLostMessage();
-			resetGame();
+			// Oh no!
+			$userMessage.removeClass("text-success").addClass("text-danger");
+			$userMessage.empty().append("<h3>Oh no!</h3>");
+			// remove message after delay
+			await delay(3000);
+			$userMessage.empty().append("<h3>&nbsp;</h3>");
+
+			glowDiv("tries-counter", "red");
+			//$("#badMessage").stop(true, true)         // reset any running animation
+			//	.fadeIn(400)              // fade in over 0.4s
+			//	.delay(2000)              // stay visible for 2s
+			//	.fadeOut(600);
+
+			failedTriesCount++;
+			showRelevantImage();
+			if (failedTriesCount == 11)
+			{
+				showLostMessage();
+				resetGame();
+			}
 		}
 	}
+	// Add to used letters array
+	if (!usedLettersArray.includes(letter))
+	{
+		usedLettersArray.push(letter);
+		$usedLettersElement.append(letter);
+	}
+}
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 function showRelevantImage()
 {
@@ -259,7 +279,6 @@ function showRelevantImage()
 	{
 		imageToShow = `hangman-final.png`;
 	}
-	debugger;
 	$("#hangman-image").attr("src", imageToShow);
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
 }

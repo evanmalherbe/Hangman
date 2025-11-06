@@ -26,7 +26,7 @@ body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background 
 #hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; padding: 1rem !important; display: flex; /* Center image */ align-items: center; justify-content: center; }
 #hangman-image { max-height: 350px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
 /* Dynamic Message Area */
-#big-user-message-div { min-height: 50px; /* Give it some base height */ display: flex; align-items: center; justify-content: center; }
+#big-user-message-div { min-height: 50px; display: flex; align-items: center; justify-content: center; }
 /* Glowing Effects - Adjusted colors for better contrast */
 .glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
 .glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
