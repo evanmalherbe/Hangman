@@ -17,7 +17,7 @@ This little Hangman game is built with .NET Core 8 with MVC architecture and Raz
 
 ## Description
 Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, there are now electronic versions. My version automatically chooses a secret word for the user to guess from a list of 100 words and simply lets the user know the number of letters in the word. <br/>
-![Hangman number of letters in secret word screenshot](Hangman/wwwroot/images/hangman-word-length.png)
+![Hangman number of letters in secret word screenshot](Hangman/wwwroot/hangman-word-length.png)
 
 ## Rules of Game
 The word to guess is represented by a row of dashes representing each letter or number of the word. Rules may permit or forbid proper nouns (such as names, places, or brands) or other types of words (such as slang). If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter does not occur in the word, the other player adds (or alternatively, removes) one element of a hanged stick figure as a tally mark. Generally, the game ends once the word is guessed, or if the stick figure is complete—signifying that all guesses have been used.
