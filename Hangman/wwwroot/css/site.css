@@ -30,9 +30,9 @@ body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background 
 /* Glowing Effects - Adjusted colors for better contrast */
 .glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
 .glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
+.hangmanHeadingDiv { background-image: url('/hangman-banner-small.jpg') !important; background-repeat: no-repeat !important; }
 
-@keyframes glowGreenBorder {
-	0% { border-color: #ced4da; /* Bootstrap default border */ box-shadow: none; }
+@keyframes glowGreenBorder { 0% { border-color: #ced4da; /* Bootstrap default border */ box-shadow: none; }
 	50% { border-color: #28a745; /* Bootstrap success green */ box-shadow: 0 0 25px rgba(40, 167, 69, 0.7); /* Green glow */ }
 	100% { border-color: #ced4da; box-shadow: none; }
 }

@@ -1,8 +1,8 @@
 ﻿// Variables
-const pageTitle = "Hangman game";
+const pageTitle = "Hangman";
 let secretWord = "";
 let secretArray = [];
-let availableTries = 3;
+let availableTries = 11;
 let failedTriesCount = 0;
 let isWon = false;
 let isLost = false;
@@ -28,7 +28,7 @@ function resetGame()
 	usedLettersArray = [];
 
 	// Clear fields
-	$("#big-user-message-div").empty()
+	//$("#big-user-message-div").empty()
 	//$(`#letter-dash-${letterIndex}`).hide();
 	$("#secret-word-input").val("");
 	$("#user-messages").empty();
