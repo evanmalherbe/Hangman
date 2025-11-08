@@ -6,12 +6,13 @@
 	int wordLength = secretWord.Length;
 }
 
-<div class="py-4 bg-light min-vh-100">
+<div class="py-4 min-vh-100">
 	<div class="row justify-content-center m-0">
 		<div class="col-lg-11 col-xl-10">
 			<div class="card shadow-lg border-0 rounded-4">
-				<div class="card-header bg-gradient text-white text-center p-2 rounded-top-4" style="background-color: #007bff; background-image: linear-gradient(135deg, #007bff 0%, #0056b3 100%);">
-					<h1 class="mb-0 fw-bold">Hangman Game</h1>
+				<div id="headerBox" class="g-0 row card-header text-white p-2 align-items-center">
+					<img id="hangman-header-image" src="/hangman-knoose.png" class="col-1 me-2" style="width:64px" alt="Hangman Progress">
+					<h1 class="col-11 mb-0 fw-bold">Hangman Game</h1>
 				</div>
 				<div class="card-body p-4 p-md-3">
 					@* Messaged to user *@
@@ -24,8 +25,8 @@
 							<!-- Guess letter -->
 							<div id="guess-letter-container" class="mb-2 p-2 px-0 bg-white">
 								<div class="input-group">
-									<input type="text" class="form-control form-control-lg" id="guess--letter-input" placeholder="" maxlength="1" aria-label="Letter guess input">
-									<button type="button" class="btn btn-success btn-lg" onclick="letterGuess()">Guess letter</button>
+									<input type="text" class="form-control form-control-lg" id="guess-letter-input" placeholder="" maxlength="1" aria-label="Letter guess input">
+									<button type="button" class="btn btn-lg text-white" style="background-color:#757576" onclick="letterGuess()">Guess letter</button>
 								</div>
 							</div>
 
@@ -55,16 +56,16 @@
 						<div id="right-column" class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center h-100 mt-2">
 
 							@* Guess whole word *@
-							<div id="guess-word-container" class="mb-2 p-2 px-0 bg-white">
+							<div id="guess-word-container" class="col-12 mb-2 p-2 px-0 bg-white">
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="guess-word-input" placeholder="" aria-label="Whole word guess input">
-									<button type="button" class="btn btn-success btn-lg" onclick="wordGuess()">Guess word</button>
+									<button type="button" class="btn text-white btn-lg" style="background-color:#757576" onclick="wordGuess()">Guess word</button>
 								</div>
 							</div>
 
 						@* 	Message to user *@
 							<div id="big-user-message-div" class="text-center mt-1 p-1 fs-4 fw-semibold text-danger">
-								<span class='text-danger' id='userMessage'><h3>Test</h3></span>
+								<h3><span class='text-danger' id='userMessage'></span></h3>
 							</div>
 
 							@* Hangman image *@

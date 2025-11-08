@@ -52,6 +52,8 @@ function saveWord()
 {
 	let $wordProgressContainer = $("#word-progress-container");
 	secretArray = secretWord.split("");
+
+
 	// Hide secret word entry and show guess entry and other stats
 	//hideContainers("hide");
 
@@ -59,6 +61,12 @@ function saveWord()
 	{
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 	});
+
+	if (secretArray.length > 10)
+	{
+		$wordProgressContainer.css("letter-spacing", "1rem");
+		$(".col-1").css("flex", "0 0 15px");
+	}
 }
 async function processMatchingLetters(matchArray, userMessage, letter)
 {
@@ -265,7 +273,6 @@ async function letterGuess()
 }
 async function wrongWordChoice()
 {
-	debugger;
 	if (isInitialGuess)
 	{
 		// Replace starting image with faded one on first guess

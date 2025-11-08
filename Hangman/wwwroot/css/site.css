@@ -7,17 +7,18 @@ html { font-size: 14px; }
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus { box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb; }
 html { position: relative; min-height: 100%; }
 /* General Body / Background */
-body { margin-bottom: 60px; background-color: #f8f9fa; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+body { margin-bottom: 60px; background-color: #2C2925; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
 /* Main container adjustments for a central, framed look */
 .container-fluid { /* Already full-width, py-4 adds vertical padding, min-vh-100 makes sure it takes full viewport height */ }
 .card {border-radius: 0px;}
 /* Card Header for a gradient effect */
 .card-header { border-bottom: none; /* Remove default border */ }
+#headerBox { color: #d7c4a3; background-color: #2C2925; background-image: linear-gradient(to bottom,#1e1c1f, #c34b28); }
 /* Input and Button sizing for a bolder feel */
 .input-group .form-control-lg,
 .input-group .btn-lg { height: calc(3.5rem + 2px); /* Larger input and button height */ }
 /* Word Progress container for clear display */
-#word-progress-container { min-height: 80px; /* Ensure it has some height even if empty */ display: flex; /* Use flexbox for better centering */ align-items: center; justify-content: center; letter-spacing: 0.5rem; /* Space out the letters */ background-color: #e9ecef; /* Slightly darker background for emphasis */ color: #343a40; /* Darker text */ border: 1px dashed #adb5bd !important; /* Dashed border for a hint of playfulness */ }
+#word-progress-container { min-height: 80px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5rem; background-color: #e9ecef; color: #343a40; border: 1px dashed #adb5bd !important; overflow:hidden;}
 /* Used Letters and Tries Counter - styling their internal cards */
 #used-letters-container .card,
 #tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
