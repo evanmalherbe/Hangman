@@ -21,10 +21,10 @@
 						<!-- Left Column -->
 						<div id="left-column" class="col-12 col-md-6 d-flex flex-column mt-2">
 
-							<!-- Guessing input -->
-							<div id="guess-container" class="mb-2 p-2 px-0 bg-white">
+							<!-- Guess letter -->
+							<div id="guess-letter-container" class="mb-2 p-2 px-0 bg-white">
 								<div class="input-group">
-									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
+									<input type="text" class="form-control form-control-lg" id="guess--letter-input" placeholder="" maxlength="1" aria-label="Letter guess input">
 									<button type="button" class="btn btn-success btn-lg" onclick="letterGuess()">Guess letter</button>
 								</div>
 							</div>
@@ -52,10 +52,22 @@
 						</div>
 
 						<!-- Right Column: Hangman image and user message -->
-						<div id="right-column" class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center h-100">
-							<div id="big-user-message-div" class="text-center mt-1 p-1 fs-4 fw-semibold text-danger">
-								<span class='text-danger' id='userMessage'><h3>&nbsp;</h3></span>
+						<div id="right-column" class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center h-100 mt-2">
+
+							@* Guess whole word *@
+							<div id="guess-word-container" class="mb-2 p-2 px-0 bg-white">
+								<div class="input-group">
+									<input type="text" class="form-control form-control-lg" id="guess-word-input" placeholder="" aria-label="Whole word guess input">
+									<button type="button" class="btn btn-success btn-lg" onclick="wordGuess()">Guess word</button>
+								</div>
 							</div>
+
+						@* 	Message to user *@
+							<div id="big-user-message-div" class="text-center mt-1 p-1 fs-4 fw-semibold text-danger">
+								<span class='text-danger' id='userMessage'><h3>Test</h3></span>
+							</div>
+
+							@* Hangman image *@
 							<div id="hangman-graphic-container" class="p-3 bg-white shadow-sm mb-4" style="">
 								<img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" class="img-fluid" alt="Hangman Progress">
 							</div>

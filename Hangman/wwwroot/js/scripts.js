@@ -33,7 +33,7 @@ function hideContainers(input)
 	{
 		// Hide secret word entry and show guess entry and other stats
 		$("#secret-word-container").removeClass("d-flex").hide();
-		$("#guess-container").addClass("d-flex").removeClass("d-none");
+		$("#guess--letter-container").addClass("d-flex").removeClass("d-none");
 		$("#word-progress-container").addClass("d-flex").removeClass("d-none");
 		$("#used-letters-container").removeClass("d-none");
 		$("#tries-counter-parent").removeClass("d-none");
@@ -42,7 +42,7 @@ function hideContainers(input)
 	{
 		// show
 		$("#secret-word-container").removeClass("d-none").show();
-		$("#guess-container").addClass("d-none").removeClass("d-flex");
+		$("#guess-letter-container").addClass("d-none").removeClass("d-flex");
 		$("#word-progress-container").empty().addClass("d-none").removeClass("d-flex");
 		$("#used-letters-container").addClass("d-none").removeClass("d-flex");
 		$("#tries-counter-parent").addClass("d-none").removeClass("d-flex");
@@ -166,6 +166,25 @@ async function alreadyTriedThisLetter(userMessage, letter)
 	await delay(2000);
 	userMessage.empty().append("<h3>&nbsp;</h3>");
 }
+async function wordGuess()
+{
+	let word = $("#guess-word-input").val();
+	if (!word)
+	{
+		return;
+	}
+	word = word.trim().toLowerCase();
+
+	if (word === secretWord)
+	{
+		isWon = true;
+		showWonMessage();
+	}
+	else
+	{
+		wrongWordChoice();
+	}
+}
 async function letterGuess()
 {
 	if (isInitialGuess)
@@ -175,7 +194,7 @@ async function letterGuess()
 		isInitialGuess = false;
 	}
 
-	let letter = $("#guess-input").val();
+	let letter = $("#guess-letter-input").val();
 	if (letter === "")
 	{
 		return;
@@ -188,7 +207,7 @@ async function letterGuess()
 
 	letter = letter.trim().toLowerCase();
 	$("#user-messages").empty();
-	$("#guess-input").val("");
+	$("#guess-letter-input").val("");
 	let isMatch = false;
 	let $userMessage = $("#userMessage")
 	let matchCount = 0;
@@ -243,6 +262,32 @@ async function letterGuess()
 	}
 	// Add to used letters array
 	//addToUserLettersBox(letter);
+}
+async function wrongWordChoice()
+{
+	debugger;
+	if (isInitialGuess)
+	{
+		// Replace starting image with faded one on first guess
+		$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
+		isInitialGuess = false;
+	}
+	$("#guess-word-input").val("");
+	let $userMessage = $("#userMessage");
+	$userMessage.removeClass("text-success").addClass("text-danger");
+	$userMessage.empty().append("<h3>Oh no!</h3>");
+
+	failedTriesCount++;
+	glowDiv("tries-counter", "red");
+	showRelevantImage();
+	// remove message after delay
+	await delay(2000);
+	$userMessage.empty().append("<h3>&nbsp;</h3>");
+
+	if (failedTriesCount == availableTries)
+	{
+		showLostMessage();
+	}
 }
 async function wrongLetterChoice($userMessage, letter)
 {
