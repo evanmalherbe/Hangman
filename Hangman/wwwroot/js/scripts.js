@@ -2,13 +2,14 @@
 const pageTitle = "Hangman";
 let secretWord = "";
 let secretArray = [];
-let availableTries = 3;
+let availableTries = 11;
 let failedTriesCount = 0;
 let isWon = false;
 let isLost = false;
 let matchedLettersArray = [];
 let matchingLettersArray = [];
 let usedLettersArray = [];
+let isInitialGuess = true;
 
 $(document).ready(async function ()
 {
@@ -58,8 +59,6 @@ function saveWord()
 	{
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 	});
-
-	$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
 }
 async function processMatchingLetters(matchArray, userMessage, letter)
 {
@@ -69,7 +68,6 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 		userMessage.empty().append("<h3>Good job!</h3>").removeClass("text-danger").addClass("text-success");
 		addToUsedLettersBox(letter);
 		glowDiv("word-progress-container", "green");
-
 
 		let matchedLettersIndexArray = [];
 		matchArray.forEach((guessedLetter, index) => 
@@ -94,7 +92,7 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 				}
 			});
 		});
-		debugger;
+
 		// Show correcly guessed letter/s in matched letters section
 		if (matchedLettersIndexArray.length > 0)
 		{
@@ -128,7 +126,7 @@ function showWonMessage()
 		imageHeight: 287,
 		imageAlt: "Hangman winner image",
 		showCancelButton: false,
-		confirmButtonColor: "#1f883d",
+		confirmButtonColor: "#0d6efd", // primary blue
 		confirmButtonText: "Ok"
 	}).then((result) =>
 	{
@@ -148,7 +146,7 @@ function showLostMessage()
 		imageHeight: 287,
 		imageAlt: "Hangman banner image",
 		showCancelButton: false,
-		confirmButtonColor: "#1f883d",
+		confirmButtonColor: "#0d6efd", // primary blue
 		confirmButtonText: "Ok"
 	}).then((result) =>
 	{
@@ -170,6 +168,13 @@ async function alreadyTriedThisLetter(userMessage, letter)
 }
 async function letterGuess()
 {
+	if (isInitialGuess)
+	{
+		// Replace starting image with faded one on first guess
+		$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
+		isInitialGuess = false;
+	}
+
 	let letter = $("#guess-input").val();
 	if (letter === "")
 	{
@@ -180,6 +185,7 @@ async function letterGuess()
 		$("#user-messages").append("<span class='text-danger'>No secret word chosen yet!</span>");
 		return;
 	}
+
 	letter = letter.trim().toLowerCase();
 	$("#user-messages").empty();
 	$("#guess-input").val("");
