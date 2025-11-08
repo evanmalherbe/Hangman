@@ -14,15 +14,14 @@
 					<h1 class="mb-0 fw-bold">Hangman Game</h1>
 				</div>
 				<div class="card-body p-4 p-md-3">
-					<div id="user-messages" class="mb-4">
-						<!-- Dynamic user messages will appear here, e.g., Bootstrap alerts -->
-					</div>
+					@* Messaged to user *@
+					<div id="user-messages" class="mb-4">	</div>
 
 					<div class="row g-4">
-						<!-- Left Column: Word Entry, Guessing, Progress -->
+						<!-- Left Column -->
 						<div id="left-column" class="col-12 col-md-6 d-flex flex-column mt-2">
 
-							<!-- Guessing Interface -->
+							<!-- Guessing input -->
 							<div id="guess-container" class="mb-2 p-2 px-0 bg-white">
 								<div class="input-group">
 									<input type="text" class="form-control form-control-lg" id="guess-input" placeholder="" maxlength="1" aria-label="Letter guess input">
@@ -30,19 +29,19 @@
 								</div>
 							</div>
 
-							<!-- Word Progress -->
-							<div id="word-progress-container" class="d-none mt-2 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace"></div>
+							<!-- Word Progress box -->
+							<div id="word-progress-container" class="mt-2 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace"></div>
 							<div id="word-length-message" class="text-muted"><span class="">Note: This secret word is @wordLength letters long</span></div>
 
 							<!-- Used Letters & Tries Counter -->
 							<div class="row mt-2 g-3">
-								<div id="used-letters-container" class="col-md-6 d-none">
+								<div id="used-letters-container" class="col-md-6">
 									<div class="card card-body bg-light p-2">
 										<h5 class="card-title text-secondary mb-2 text-center">Used Letters</h5>
 										<p id="used-letters" class="mb-0 fs-4 fw-bold text-muted text-uppercase">&nbsp;</p>
 									</div>
 								</div>
-								<div id="tries-counter-parent" class="col-md-6 d-none">
+								<div id="tries-counter-parent" class="col-md-6">
 									<div id="tries-counter" class="card card-body bg-light border-secondary bg-white p-2">
 										<h5 class="card-title text-secondary mb-2 text-center">Remaining Tries</h5>
 										<span id="tries-count-message" class="fs-4 fw-bold text-primary text-center">11</span>
@@ -52,7 +51,7 @@
 
 						</div>
 
-						<!-- Right Column: Hangman Graphic & Big Message -->
+						<!-- Right Column: Hangman image and user message -->
 						<div id="right-column" class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center h-100">
 							<div id="big-user-message-div" class="text-center mt-1 p-1 fs-4 fw-semibold text-danger">
 								<span class='text-danger' id='userMessage'><h3>&nbsp;</h3></span>

@@ -2,7 +2,7 @@
 const pageTitle = "Hangman";
 let secretWord = "";
 let secretArray = [];
-let availableTries = 11;
+let availableTries = 3;
 let failedTriesCount = 0;
 let isWon = false;
 let isLost = false;
@@ -12,36 +12,8 @@ let usedLettersArray = [];
 
 $(document).ready(async function ()
 {
-	$(document).attr("title", pageTitle);
+	//$(document).attr("title", pageTitle);
 });
-function resetGame()
-{
-	// reset variables
-	isWon = false;
-	isLost = false;
-	secretWord = "";
-	secretArray = [];
-	failedTriesCount = 0;
-	matchedLettersArray = [];
-	matchCount = 0;
-	matchingLettersArray = [];
-	usedLettersArray = [];
-
-	// Clear fields
-	//$("#big-user-message-div").empty()
-	//$(`#letter-dash-${letterIndex}`).hide();
-	$("#secret-word-input").val("");
-	$("#user-messages").empty();
-	$("#used-letters").empty();
-	$("#guess-input").val("");
-	$("#badMessage").empty();
-	$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-0.png");
-	$(".letter-match").empty().hide();
-	$(".letter-dash").hide();
-	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
-
-	hideContainers("show");
-}
 function glowDiv(divId, colour) 
 {
 	let glowColour = colour === "green" ? "glowGreen" : "glowRed";
@@ -80,7 +52,7 @@ function saveWord()
 	let $wordProgressContainer = $("#word-progress-container");
 	secretArray = secretWord.split("");
 	// Hide secret word entry and show guess entry and other stats
-	hideContainers("hide");
+	//hideContainers("hide");
 
 	secretArray.forEach((secretLetter, index) =>
 	{
@@ -89,22 +61,15 @@ function saveWord()
 
 	$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
 }
-async function processMatchingLetters(matchArray, userMessage)
+async function processMatchingLetters(matchArray, userMessage, letter)
 {
 	if (matchArray.length > 0)
 	{
 		// Show user message
 		userMessage.empty().append("<h3>Good job!</h3>").removeClass("text-danger").addClass("text-success");
-		await delay(2000);
-		userMessage.empty().append("<h3>&nbsp;</h3>");
-	
-		/*$("#big-user-message-div").empty().append("<span id='goodMessage' class='text-success'><h3>Good job!</h3></span>");*/
-		
+		addToUsedLettersBox(letter);
 		glowDiv("word-progress-container", "green");
-		//$("#goodMessage").stop(true, true)         // reset any running animation
-		//	.fadeIn(400)              // fade in over 0.4s
-		//	.delay(2000)              // stay visible for 2s
-		//	.fadeOut(600);
+
 
 		let matchedLettersIndexArray = [];
 		matchArray.forEach((guessedLetter, index) => 
@@ -116,7 +81,7 @@ async function processMatchingLetters(matchArray, userMessage)
 					matchedLettersIndexArray.push(index);
 					// check how many times correctly guessed letter appears in secret word
 					let numberOfTimes = secretArray.filter(i => i == guessedLetter).length;
-					
+
 					for (let i = 0; i <= numberOfTimes; i++)
 					{
 						// check how many times this letter has been added to "matched letters array" already
@@ -129,7 +94,7 @@ async function processMatchingLetters(matchArray, userMessage)
 				}
 			});
 		});
-
+		debugger;
 		// Show correcly guessed letter/s in matched letters section
 		if (matchedLettersIndexArray.length > 0)
 		{
@@ -139,12 +104,16 @@ async function processMatchingLetters(matchArray, userMessage)
 				$(`#letter-match-${letterIndex}`).show();
 			});
 		}
+
+		// show user message for 2 seconds
+		await delay(2000);
+		userMessage.empty().append("<h3>&nbsp;</h3>");
+
 		// All guessed letters match secret word
 		if (matchedLettersArray.length == secretArray.length)
 		{
 			isWon = true;
 			showWonMessage();
-			resetGame();
 		}
 	}
 }
@@ -157,7 +126,16 @@ function showWonMessage()
 		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-win-colour.png",
 		imageWidth: 500,
 		imageHeight: 287,
-		imageAlt: "Hangman winner image"
+		imageAlt: "Hangman winner image",
+		showCancelButton: false,
+		confirmButtonColor: "#1f883d",
+		confirmButtonText: "Ok"
+	}).then((result) =>
+	{
+		if (result.isConfirmed)
+		{
+			location.reload();
+		}
 	});
 }
 function showLostMessage()
@@ -168,14 +146,24 @@ function showLostMessage()
 		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-banner.png",
 		imageWidth: 500,
 		imageHeight: 287,
-		imageAlt: "Hangman banner image"
+		imageAlt: "Hangman banner image",
+		showCancelButton: false,
+		confirmButtonColor: "#1f883d",
+		confirmButtonText: "Ok"
+	}).then((result) =>
+	{
+		if (result.isConfirmed)
+		{
+			location.reload();
+		}
 	});
 }
-async function alreadyTriedThisLetter(userMessage)
+async function alreadyTriedThisLetter(userMessage, letter)
 {
 	// Already tried this letter
 	userMessage.removeClass("text-danger").addClass("text-success");
 	userMessage.empty().append("<h3>Already tried this letter!</h3>");
+	addToUsedLettersBox(letter);
 	// remove message after delay
 	await delay(2000);
 	userMessage.empty().append("<h3>&nbsp;</h3>");
@@ -196,8 +184,6 @@ async function letterGuess()
 	$("#user-messages").empty();
 	$("#guess-input").val("");
 	let isMatch = false;
-	let $usedLettersElement = $("#used-letters");
-/*	let $bigUserMessageDiv = $("#big-user-message-div");*/
 	let $userMessage = $("#userMessage")
 	let matchCount = 0;
 
@@ -229,53 +215,58 @@ async function letterGuess()
 	if (matchCount > 0 && isMatch)
 	{
 		// Good job!
-		await processMatchingLetters(matchingLettersArray, $userMessage);
+		await processMatchingLetters(matchingLettersArray, $userMessage, letter);
 	}
 	else if (matchCount == 0 && isMatch)
 	{
 		// Already tried this letter
-		await alreadyTriedThisLetter($userMessage);
+		await alreadyTriedThisLetter($userMessage, letter);
 	}
 	else
 	{
 		if (usedLettersArray.includes(letter))
 		{
 			// Already tried this letter
-			await alreadyTriedThisLetter($userMessage);
+			await alreadyTriedThisLetter($userMessage, letter);
 		}
 		else
 		{
 			// Oh no!
-			$userMessage.removeClass("text-success").addClass("text-danger");
-			$userMessage.empty().append("<h3>Oh no!</h3>");
-			// remove message after delay
-			await delay(2000);
-			$userMessage.empty().append("<h3>&nbsp;</h3>");
-
-			glowDiv("tries-counter", "red");
-			//$("#badMessage").stop(true, true)         // reset any running animation
-			//	.fadeIn(400)              // fade in over 0.4s
-			//	.delay(2000)              // stay visible for 2s
-			//	.fadeOut(600);
-
-			failedTriesCount++;
-			showRelevantImage();
-			if (failedTriesCount == availableTries)
-			{
-				showLostMessage();
-				resetGame();
-			}
+			await wrongLetterChoice($userMessage, letter);
 		}
 	}
+	// Add to used letters array
+	//addToUserLettersBox(letter);
+}
+async function wrongLetterChoice($userMessage, letter)
+{
+	$userMessage.removeClass("text-success").addClass("text-danger");
+	$userMessage.empty().append("<h3>Oh no!</h3>");
+	addToUsedLettersBox(letter);
+	failedTriesCount++;
+	glowDiv("tries-counter", "red");
+	showRelevantImage();
+	// remove message after delay
+	await delay(2000);
+	$userMessage.empty().append("<h3>&nbsp;</h3>");
+
+	if (failedTriesCount == availableTries)
+	{
+		showLostMessage();
+	}
+}
+function addToUsedLettersBox(letter)
+{
 	// Add to used letters array
 	if (!usedLettersArray.includes(letter))
 	{
 		usedLettersArray.push(letter);
-		$usedLettersElement.append(letter);
+		$("#used-letters").append(letter);
 	}
 }
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function delay(ms)
+{
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
 function showRelevantImage()
 {
