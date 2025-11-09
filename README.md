@@ -19,7 +19,7 @@ This simple, yet addictive Hangman game is built with **.NET Core 8 with MVC arc
 
 ## Description
 Hangman is a guessing game for two or more players. One player thinks of a word, phrase, or sentence and the other(s) tries to guess it by suggesting letters or numbers within a certain number of guesses. Originally a paper-and-pencil game, obviously we have online versions now. My version automatically chooses a secret word for the user to guess from a **list of 100 words** and simply lets the user know the number of letters in the word. See image below.<br/><br/>
-![Hangman number of letters in secret word screenshot](https://imagestore-production.up.railway.app/images/hangman/hangman-word-length.png)
+![Hangman number of letters in secret word screenshot](https://imagestore-production.up.railway.app/images/hangman/hangman-wordlength.png)
 
 ## Rules of Game
 The word to guess is represented by a row of dashes representing each letter or number of the word. If the guessing player suggests a letter which occurs in the word, the app adds the letter in all the places where it occurs in the word (if more than one place). If the suggested letter does not occur in the word, another element is added to the hanging stick figure which brings the poor stick man closer to his death (and the player closer to losing the game)! Generally, the game ends once the word is guessed (hooray!), or if the stick figure is complete — signifying that all guesses have been used and the player loses the game.
@@ -40,7 +40,7 @@ This project is a .NET Core MVC web application. To run it outside of Visual Stu
 
 ## Usage
 Once you open the project in your browser `http://localhost:5000` (or similar), you will see the main game screen. Since the app automatically chooses a secret word from the 100 word list for the user, you can immediately start making guesses by typing a letter into the box and clicking the **Guess letter** button. See image below.<br/><br/>
-![Guess a letter - screenshot](https://imagestore-production.up.railway.app/images/hangman/first-guess.png)
+![Guess a letter - screenshot](https://imagestore-production.up.railway.app/images/hangman/hangman-guess.png)
 
 ## Contributing
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
