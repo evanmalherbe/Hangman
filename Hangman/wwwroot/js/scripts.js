@@ -146,7 +146,6 @@ async function alreadyTriedThisLetter(userMessage, letter)
 }
 function whichGuess()
 {
-	debugger;
 	let input = $("#guess-letter-input").val();
 	if (!input)
 	{

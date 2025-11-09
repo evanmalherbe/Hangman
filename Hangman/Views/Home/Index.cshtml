@@ -15,18 +15,18 @@
   </header>
 
   <main class="game-area row">
-    <section id="hangman-graphic-container" class="border visual-area d-flex col-12 col-lg-6 justify-content-center align-items-center">
+    <section id="hangman-graphic-container" class="visual-area d-flex col-12 col-lg-6 justify-content-center align-items-center">
       <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
     </section>
 
-    <section class="game-info col-12 col-lg-6 border">
+    <section class="game-info col-12 col-lg-6">
 
       <div id="big-user-message-div" class="info-box message-box">
         <h3><span class='text-danger' id='userMessage'></span></h3>
       </div>
 
       <div class="guess-form" id="guess-word-container">
-        <label for="guess-letter-input">Guess a Letter or word:</label>
+        <label for="guess-letter-input">Guess a letter or the whole word:</label>
         <input type="text" id="guess-letter-input" class="guess-input" pattern="[a-zA-Z]" placeholder="Enter a guess" />
         <button id="submit-guess-button" class="btn" onclick="whichGuess()">Guess</button>
       </div>
@@ -44,7 +44,7 @@
 
       <div class="info-box used-letters-box">
         <h2>Used Letters</h2>
-        <p class="used-letters-display" id="used-letters"></p>
+        <p class="used-letters-display" id="used-letters">&nbsp;</p>
       </div>
 
     </section>
