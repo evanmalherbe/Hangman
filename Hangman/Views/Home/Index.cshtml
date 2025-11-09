@@ -14,12 +14,12 @@
     </div>
   </header>
 
-  <main class="game-area">
-    <section id="hangman-graphic-container" class="visual-area">
+  <main class="game-area row">
+    <section id="hangman-graphic-container" class="border visual-area d-flex col-12 col-lg-6 justify-content-center align-items-center">
       <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
     </section>
 
-    <section class="game-info">
+    <section class="game-info col-12 col-lg-6 border">
 
       <div id="big-user-message-div" class="info-box message-box">
         <h3><span class='text-danger' id='userMessage'></span></h3>
@@ -33,19 +33,18 @@
 
       <div class="info-box secret-word-box">
         <h2>Secret Word</h2>
-        <div id="word-progress-container" class="secret-word-display">
-        
+        <div id="word-progress-container" class="secret-word-display d-flex align-items-center justify-content-center">
         </div>
       </div>
 
       <div class="info-box tries-box" id="tries-counter">
         <h2>Remaining Tries</h2>
-        <p class="mb-0 remaining-tries" id="tries-count-message">11</p>
+        <p class="remaining-tries" id="tries-count-message">11</p>
       </div>
 
       <div class="info-box used-letters-box">
         <h2>Used Letters</h2>
-        <p class="mb-0 used-letters-display" id="used-letters"></p>
+        <p class="used-letters-display" id="used-letters"></p>
       </div>
 
     </section>
