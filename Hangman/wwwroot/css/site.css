@@ -8,6 +8,9 @@
 
 body { min-height: 100vh; /* Ensure the body takes up at least the full viewport height */  /* Helps center and control content vertically */ background-color: #121212; color: #f0f0f0; /* Light text on dark background */ font-family: 'Arial', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
 .container { width: 90%; /* Use a percentage width */ margin: auto; /* Centers the container */ padding: 20px; /* Allows container to take available space */ }
+@media (max-width: 768px) {
+  .container {width: 95%; margin: auto; padding: 10px; }
+}
 /* --- Header & Title --- */
 header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 20px; }
 .logo-title { display: flex; align-items: center; }
@@ -23,14 +26,14 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 2
 .info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.1em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
 /* Specific Info Box Styles */
 .secret-word-box { margin-bottom: 5px;}
-.secret-word-display { font-size: 2em; letter-spacing: 10px; font-weight: bold; color: #f0f0f0; }
+.secret-word-display { font-size: 2em;  font-weight: bold; color: #f0f0f0; }
 /*background-color: #e9ecef;*/
 /*#word-progress-container { min-height: 80px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5rem; color: #343a40; border: 1px dashed #adb5bd !important; overflow: hidden; }*/
 .remaining-tries { font-size: 2em; font-weight: bold; color: #f0f0f0; padding-bottom:0px; margin-bottom:0px; }
 .used-letters-box h2 { padding: 0px; margin-top: 0px; margin-bottom: 0px; }
 .used-letters-display { font-size: 2em; font-weight: bold; letter-spacing: 2px; color: #f0f0f0; margin-bottom: 0px; margin-top: 0px; padding: 0px; }
 /* --- Message Box --- */
-.message-box { text-align: center; min-height: 50px; margin-bottom: 5px; }
+.message-box { text-align: center; min-height: 50px; margin-bottom: 5px; margin-top: 5px;}
 .message-box span { font-weight: bold; font-size: 1.2em; margin: 0; }
 .hidden { /* Class to be toggled by jQuery */ display: none; }
 /* --- Guess Input Form --- */

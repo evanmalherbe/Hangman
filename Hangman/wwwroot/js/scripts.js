@@ -35,8 +35,19 @@ function saveWord()
 
 	if (secretArray.length > 10)
 	{
-		$wordProgressContainer.css("letter-spacing", "1rem");
-		$(".col-1").css("flex", "0 0 15px");
+		let screenWidth = window.innerWidth;
+		if (screenWidth < 600)
+		{
+			// mobile
+			$wordProgressContainer.css("letter-spacing", "0.5rem");
+			$(".col-1").css("flex", "0 0 5px");
+		}
+		else
+		{
+			// desktop / tablet
+			$wordProgressContainer.css("letter-spacing", "1rem");
+			$(".col-1").css("flex", "0 0 15px");
+		}
 	}
 }
 async function processMatchingLetters(matchArray, userMessage, letter)
