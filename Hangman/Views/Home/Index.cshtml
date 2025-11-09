@@ -2,86 +2,55 @@
 @model Hangman.ViewModel.HomeViewModel
 
 @{
-	string secretWord = Model?.SecretWord ?? "";
-	int wordLength = secretWord.Length;
+  string secretWord = Model?.SecretWord ?? "";
+  int wordLength = secretWord.Length;
 }
 
-<div class="py-4 min-vh-100">
-	<div class="row justify-content-center m-0">
-		<div class="col-lg-11 col-xl-10">
-			<div class="card shadow-lg border-0 rounded-4">
-				<div id="headerBox" class="g-0 row card-header text-white p-2 align-items-center">
-					<img id="hangman-header-image" src="/hangman-knoose.png" class="col-1 me-2" style="width:64px" alt="Hangman Progress">
-					<h1 class="col-11 mb-0 fw-bold">Hangman Game</h1>
-				</div>
-				<div class="card-body p-4 p-md-3">
-					@* Messaged to user *@
-					<div id="user-messages" class="mb-4">	</div>
+<div class="container">
+  <header>
+    <div class="logo-title">
+      <div id="logo-placeholder" class="logo-placeholder"></div>
+      <h1 id="game-heading">Hangman</h1>
+    </div>
+  </header>
 
-					<div class="row g-4">
-						<!-- Left Column -->
-						<div id="left-column" class="col-12 col-md-6 d-flex flex-column mt-2">
+  <main class="game-area">
+    <section id="hangman-visual" class="visual-area">
+      <img id="hangman-image" src="/images/hangman_0.png" alt="Hangman Character" />
+    </section>
 
-							<!-- Guess letter -->
-							<div id="guess-letter-container" class="mb-2 p-2 px-0 bg-white">
-								<div class="input-group">
-									<input type="text" class="form-control form-control-lg" id="guess-letter-input" placeholder="" maxlength="1" aria-label="Letter guess input">
-									<button type="button" class="btn btn-lg text-white" style="background-color:#757576" onclick="letterGuess()">Guess letter</button>
-								</div>
-							</div>
+    <section class="game-info">
 
-							<!-- Word Progress box -->
-							<div id="word-progress-container" class="mt-2 p-4 border rounded bg-light text-center fs-1 fw-bold text-monospace"></div>
-							<div id="word-length-message" class="text-muted"><span class="">Note: This secret word is @wordLength letters long</span></div>
+      <div id="message-box" class="info-box message-box hidden">
+        <p id="user-message"></p>
+      </div>
 
-							<!-- Used Letters & Tries Counter -->
-							<div class="row mt-2 g-3">
-								<div id="used-letters-container" class="col-md-6">
-									<div class="card card-body bg-light p-2">
-										<h5 class="card-title text-secondary mb-2 text-center">Used Letters</h5>
-										<p id="used-letters" class="mb-0 fs-4 fw-bold text-muted text-uppercase">&nbsp;</p>
-									</div>
-								</div>
-								<div id="tries-counter-parent" class="col-md-6">
-									<div id="tries-counter" class="card card-body bg-light border-secondary bg-white p-2">
-										<h5 class="card-title text-secondary mb-2 text-center">Remaining Tries</h5>
-										<span id="tries-count-message" class="fs-4 fw-bold text-primary text-center">11</span>
-									</div>
-								</div>
-							</div>
+      <div class="info-box secret-word-box">
+        <h2>Secret Word</h2>
+        <p id="secret-word-display">_ _ _ _ _ _ _</p>
+      </div>
 
-						</div>
+      <div class="info-box tries-box">
+        <h2>Remaining Tries</h2>
+        <p id="remaining-tries">11</p>
+      </div>
 
-						<!-- Right Column: Hangman image and user message -->
-						<div id="right-column" class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center h-100 mt-2">
+      <div class="info-box used-letters-box">
+        <h2>Used Letters</h2>
+        <p id="used-letters-display">A, E, I, O</p>
+      </div>
 
-							@* Guess whole word *@
-							<div id="guess-word-container" class="col-12 mb-2 p-2 px-0 bg-white">
-								<div class="input-group">
-									<input type="text" class="form-control form-control-lg" id="guess-word-input" placeholder="" aria-label="Whole word guess input">
-									<button type="button" class="btn text-white btn-lg" style="background-color:#757576" onclick="wordGuess()">Guess word</button>
-								</div>
-							</div>
+      <hr>
 
-						@* 	Message to user *@
-							<div id="big-user-message-div" class="text-center mt-1 p-1 fs-4 fw-semibold text-danger">
-								<h3><span class='text-danger' id='userMessage'></span></h3>
-							</div>
+      <div class="guess-form">
+        <label for="guess-input">Guess a Letter:</label>
+        <input type="text" id="guess-input" maxlength="1" pattern="[a-zA-Z]" placeholder="Enter a letter" />
+        <button id="submit-guess-button" class="btn">Guess</button>
+      </div>
 
-							@* Hangman image *@
-							<div id="hangman-graphic-container" class="p-3 bg-white shadow-sm mb-4" style="">
-								<img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" class="img-fluid" alt="Hangman Progress">
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+    </section>
+  </main>
 </div>
-
 @section scripts {
 
 	<script type="text/javascript">

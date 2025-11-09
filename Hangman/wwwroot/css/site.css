@@ -1,58 +1,69 @@
-html { font-size: 14px; }
+/* --- Color Palette --- */
+/*
+  Background: #121212 (Near Black)
+  Primary Accent (Text/Borders): #f0f0f0 (Off-White/Light Grey)
+  Secondary Accent (Action/Warning): #CC0000 (Deep Red)
+  Tertiary Accent (Boxes): #1e1e1e (Dark Grey)
+*/
 
-@media (min-width: 768px) {
-	html { font-size: 16px; }
-}
+body { background-color: #121212; color: #f0f0f0; /* Light text on dark background */ font-family: 'Arial', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus { box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb; }
-html { position: relative; min-height: 100%; }
-/* General Body / Background */
-body { margin-bottom: 60px; background-color: #2C2925; /* Light gray background */ font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-/* Main container adjustments for a central, framed look */
-.container-fluid { /* Already full-width, py-4 adds vertical padding, min-vh-100 makes sure it takes full viewport height */ }
-.card {border-radius: 0px;}
-/* Card Header for a gradient effect */
-.card-header { border-bottom: none; /* Remove default border */ }
-#headerBox { color: #d7c4a3; background-color: #2C2925; background-image: linear-gradient(to bottom,#1e1c1f, #c34b28); }
-/* Input and Button sizing for a bolder feel */
-.input-group .form-control-lg,
-.input-group .btn-lg { height: calc(3.5rem + 2px); /* Larger input and button height */ }
-/* Word Progress container for clear display */
-#word-progress-container { min-height: 80px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5rem; background-color: #e9ecef; color: #343a40; border: 1px dashed #adb5bd !important; overflow:hidden;}
-/* Used Letters and Tries Counter - styling their internal cards */
-#used-letters-container .card,
-#tries-counter-parent .card { background-color: #f1f3f5 !important; /* Lighter background for these informational cards */ border-color: #ced4da !important; }
-#used-letters { word-wrap: break-word; /* Ensure long lists of letters wrap */ }
-/* Hangman image styling */
-#hangman-graphic-container { background-color: #fff; border: 1px solid #dee2e6; display: flex; /* Center image */ align-items: center; justify-content: center; }
-#hangman-image { max-height: 400px; /* Limit max height */ object-fit: contain; /* Ensure image fits without stretching */ }
-/* Dynamic Message Area */
-#big-user-message-div { min-height: 50px; display: flex; align-items: center; justify-content: center; }
-/* Glowing Effects - Adjusted colors for better contrast */
-.glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
-.glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
-.hangmanHeadingDiv { background-image: url('/hangman-banner-small.jpg') !important; background-repeat: no-repeat !important; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-@keyframes glowGreenBorder { 0% { border-color: #ced4da; /* Bootstrap default border */ box-shadow: none; }
-	50% { border-color: #28a745; /* Bootstrap success green */ box-shadow: 0 0 25px rgba(40, 167, 69, 0.7); /* Green glow */ }
-	100% { border-color: #ced4da; box-shadow: none; }
-}
+/* --- Header & Title --- */
 
-@keyframes glowRedBorder {
-	0% { border-color: #ced4da; box-shadow: none; }
-	50% { border-color: #dc3545; /* Bootstrap danger red */ box-shadow: 0 0 25px rgba(220, 53, 69, 0.7); /* Red glow */ }
-	100% { border-color: #ced4da; box-shadow: none; }
-}
+header { border-bottom: 2px solid #CC0000; padding-bottom: 10px; margin-bottom: 30px; }
 
-/* Optional: Custom scrollbar for better look if left-container overflows */
-.left-container { /* Removed max-height/overflow-y from original, re-evaluate if needed */ /* max-height: 100vh; */ /* overflow-y: auto; */ /* Add custom scrollbar if needed, e.g., for Webkit browsers: */ /* &::-webkit-scrollbar { width: 8px; } */ /* &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; } */ /* &::-webkit-scrollbar-thumb:hover { background: #555; } */ }
-/* Specific adjustments for smaller screens */
-@media (max-width: 767.98px) {
-	.card-body.p-md-5 { padding: 1.5rem !important; /* Less padding on small screens */ }
-	.input-group .form-control-lg,
-	.input-group .btn-lg { height: calc(2.8rem + 2px); /* Slightly smaller inputs/buttons on mobile */ font-size: 1rem; }
-	h1 { font-size: 2rem; /* Smaller title */ }
-	.fs-5 { font-size: 1.1rem !important; /* Adjust label size */ }
-	.fs-1 { font-size: 2.5rem !important; /* Adjust word progress size */ }
-	.fs-4 { font-size: 1.2rem !important; /* Adjust other text sizes */ }
-}
+.logo-title { display: flex; align-items: center; }
+
+.logo-placeholder { width: 60px; height: 60px; background-color: #CC0000; /* Placeholder color for the logo */ margin-right: 15px; border-radius: 5px; /* Optional: Add a subtle graphic to the logo placeholder */ display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 24px; }
+
+#game-heading { font-size: 3em; color: #CC0000; /* Red heading for high impact */ margin: 0; text-transform: uppercase; letter-spacing: 5px; }
+
+/* --- Main Game Area Layout --- */
+
+.game-area { display: flex; gap: 40px; }
+
+.visual-area { flex: 2; /* Takes up more space for the visual element */ background-color: #1e1e1e; border: 1px solid #333; padding: 20px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+
+#hangman-image { max-width: 100%; height: auto; /* You may want to ensure a max height depending on your images */ max-height: 500px; }
+
+.game-info { flex: 1; /* Takes up less space */ display: flex; flex-direction: column; gap: 20px; }
+
+/* --- Info Boxes --- */
+
+.info-box { background-color: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 6px; text-align: center; }
+
+	.info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.2em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
+
+/* Specific Info Box Styles */
+#secret-word-display { font-size: 2.5em; letter-spacing: 15px; /* Increase spacing for clear underscores */ font-weight: bold; color: #f0f0f0; }
+
+#remaining-tries { font-size: 3em; font-weight: bold; color: #f0f0f0; }
+
+#used-letters-display { font-size: 1.5em; letter-spacing: 2px; color: #aaa; /* Slightly subdued text for used letters */ }
+
+/* --- Message Box --- */
+
+.message-box { border: 2px solid #CC0000; background-color: #331212; /* Darker red background for messages */ text-align: center; min-height: 50px; /* Ensure space even when hidden */ }
+
+	.message-box p { font-weight: bold; font-size: 1.2em; margin: 0; }
+
+.hidden { /* Class to be toggled by jQuery */ display: none; }
+
+/* --- Guess Input Form --- */
+
+.guess-form { display: flex; flex-direction: column; gap: 10px; background-color: #1e1e1e; padding: 20px; border-radius: 6px; border: 1px solid #333; }
+
+	.guess-form label { font-size: 1.1em; color: #f0f0f0; }
+
+#guess-input { padding: 10px; font-size: 1.5em; text-align: center; text-transform: uppercase; background-color: #2a2a2a; border: 1px solid #444; color: #f0f0f0; border-radius: 4px; }
+
+/* Remove up/down arrows from number input if supported */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Button Styling */
+.btn { padding: 12px 20px; background-color: #CC0000; color: #f0f0f0; border: none; border-radius: 4px; cursor: pointer; font-size: 1.2em; transition: background-color 0.2s ease; text-transform: uppercase; font-weight: bold; }
+
+	.btn:hover { background-color: #ff3333; /* Lighter red on hover */ }
