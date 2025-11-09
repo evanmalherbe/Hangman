@@ -19,13 +19,13 @@
       <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
     </section>
 
-    <section class="game-info col-12 col-lg-6">
+    <section class="game-info row col-12 col-lg-6 g-0 g-lg-1 mt-0">
 
-      <div id="big-user-message-div" class="info-box message-box">
+      <div id="big-user-message-div" class="info-box message-box mt-2 mt-lg-0">
         <h3><span class='text-danger' id='userMessage'></span></h3>
       </div>
 
-      <div class="guess-form" id="guess-word-container">
+      <div class="guess-form justify-content-center align-items-center" id="guess-word-container">
         <label for="guess-letter-input">Guess a letter or the whole word:</label>
         <input type="text" id="guess-letter-input" class="guess-input" pattern="[a-zA-Z]" placeholder="Enter a guess" />
         <button id="submit-guess-button" class="btn" onclick="whichGuess()">Guess</button>
