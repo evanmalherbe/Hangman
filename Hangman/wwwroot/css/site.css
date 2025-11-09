@@ -40,8 +40,7 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 2
 .used-letters-display { font-size: 1.5em; font-weight: bold; letter-spacing: 2px; color: #f0f0f0; margin-bottom: 0px; margin-top: 0px; padding: 0px; }
 /* --- Message Box --- */
 .message-box { text-align: center; min-height: 50px;}
-.message-box span { font-weight: bold; font-size: 1.2em; }
-.message-box h3 {margin-top: 1rem;}
+ .message-box h3 { margin-top: 1rem; font-weight: bold; font-size: 1.75em; letter-spacing: 2px}
 .hidden { /* Class to be toggled by jQuery */ display: none; }
 /* --- Guess Input Form --- */
 .guess-form { background-color: #1e1e1e; padding: 10px; border-radius: 6px; border: 1px solid #333; margin-bottom: 5px }
