@@ -1,5 +1,5 @@
 # Hangman
-This simple, yet addictive Hangman game is built with **.NET Core 8 with MVC architecture** and **Razor** views. Much of the game logic and functionality uses **Javascript**. I challenge you to give it a try! It's quite fun.<br/> 
+This simple, yet addictive Hangman game is built with **.NET Core 8 with MVC architecture** and **Razor** views. Much of the game logic and functionality uses **Javascript**. I challenge you to give it a try! It's quite fun and is mobile friendly too.<br/> 
 
 ### Technologies
 ![.NET 8](https://img.shields.io/badge/.NET%208-000)
