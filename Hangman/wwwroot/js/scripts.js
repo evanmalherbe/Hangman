@@ -318,7 +318,8 @@ function addToUsedLettersBox(letter)
 	if (!usedLettersArray.includes(letter))
 	{
 		usedLettersArray.push(letter);
-		$("#used-letters").append(letter);
+
+		$("#used-letters").append(letter.toUpperCase());
 	}
 }
 function delay(ms)

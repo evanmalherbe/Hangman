@@ -37,17 +37,18 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 2
 	.info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.1em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
 
 /* Specific Info Box Styles */
-#secret-word-display { flex: 1;font-size: 2em; letter-spacing: 10px; /* Increase spacing for clear underscores */ font-weight: bold; color: #f0f0f0; }
+.secret-word-display { flex: 1; font-size: 2em; letter-spacing: 10px; font-weight: bold; color: #f0f0f0; display: flex; align-items: center; justify-content: center; }
+/*background-color: #e9ecef;*/
+/*#word-progress-container { min-height: 80px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5rem; color: #343a40; border: 1px dashed #adb5bd !important; overflow: hidden; }*/
+.remaining-tries { flex:1;font-size: 2.5em; font-weight: bold; color: #f0f0f0; }
 
-#remaining-tries { flex:1;font-size: 2.5em; font-weight: bold; color: #f0f0f0; }
-
-#used-letters-display { flex:1;font-size: 1.5em; letter-spacing: 2px; color: #aaa; /* Slightly subdued text for used letters */ }
+.used-letters-display { flex:1;font-size: 1.5em; letter-spacing: 2px; color: #aaa; /* Slightly subdued text for used letters */ }
 
 /* --- Message Box --- */
 
-.message-box { border: 2px solid #CC0000; background-color: #331212; /* Darker red background for messages */ text-align: center; min-height: 50px; /* Ensure space even when hidden */ }
+.message-box { /*border: 2px solid #CC0000;*/ /* #331212 Darker red background for messages */ text-align: center; min-height: 50px; /* Ensure space even when hidden */ }
 
-	.message-box p { font-weight: bold; font-size: 1.2em; margin: 0; }
+	.message-box span { font-weight: bold; font-size: 1.2em; margin: 0; }
 
 .hidden { /* Class to be toggled by jQuery */ display: none; }
 
@@ -57,7 +58,7 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 2
 
 	.guess-form label { font-size: 1.1em; color: #f0f0f0; }
 
-#guess-input { padding: 10px; font-size: 1.5em; text-align: center; text-transform: uppercase; background-color: #2a2a2a; border: 1px solid #444; color: #f0f0f0; border-radius: 4px; }
+.guess-input { padding: 10px; font-size: 1.5em; text-align: center; text-transform: uppercase; background-color: #2a2a2a; border: 1px solid #444; color: #f0f0f0; border-radius: 4px; }
 
 /* Remove up/down arrows from number input if supported */
 input[type=number]::-webkit-inner-spin-button,

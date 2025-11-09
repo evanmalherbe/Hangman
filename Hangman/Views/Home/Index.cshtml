@@ -9,41 +9,43 @@
 <div class="container">
   <header>
     <div class="logo-title">
-      <div id="logo-placeholder" class="logo-placeholder"></div>
+      <div id="logo-placeholder" class="logo-placeholder"><img id="hangman-header-image" src="/hangman-knoose.png" class="" style="width:80%" alt="Hangman Progress"></div>
       <h1 id="game-heading">Hangman</h1>
     </div>
   </header>
 
   <main class="game-area">
-    <section id="hangman-visual" class="visual-area">
+    <section id="hangman-graphic-container" class="visual-area">
       <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
     </section>
 
     <section class="game-info">
 
-      <div id="message-box" class="info-box message-box hidden">
-        <p id="user-message"></p>
+      <div id="big-user-message-div" class="info-box message-box">
+        <h3><span class='text-danger' id='userMessage'></span></h3>
       </div>
 
-      <div class="guess-form">
-        <label for="guess-input">Guess a Letter:</label>
-        <input type="text" id="guess-input" maxlength="1" pattern="[a-zA-Z]" placeholder="Enter a letter" />
-        <button id="submit-guess-button" class="btn">Guess</button>
+      <div class="guess-form" id="guess-word-container">
+        <label for="guess-letter-input">Guess a Letter:</label>
+        <input type="text" id="guess-letter-input" class="guess-input" maxlength="1" pattern="[a-zA-Z]" placeholder="Enter a letter" />
+        <button id="submit-guess-button" class="btn" onclick="letterGuess()">Guess</button>
       </div>
 
       <div class="info-box secret-word-box">
         <h2>Secret Word</h2>
-        <p class="mb-0" id="secret-word-display">_ _ _ _ _ _ _</p>
+        <div id="word-progress-container" class="secret-word-display">
+        
+        </div>
       </div>
 
-      <div class="info-box tries-box">
+      <div class="info-box tries-box" id="tries-counter">
         <h2>Remaining Tries</h2>
-        <p class="mb-0" id="remaining-tries">11</p>
+        <p class="mb-0 remaining-tries" id="tries-count-message">11</p>
       </div>
 
       <div class="info-box used-letters-box">
         <h2>Used Letters</h2>
-        <p class="mb-0" id="used-letters-display">A, E, I, O</p>
+        <p class="mb-0 used-letters-display" id="used-letters"></p>
       </div>
 
     </section>
