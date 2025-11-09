@@ -24,6 +24,9 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 2
 @media (max-width: 600px) {
   .game-info { width: 100%; }
 }
+@media (min-width: 1365px) {
+  .game-info { width: 48%; }
+}
 /* --- Info Boxes --- */
 .info-box { margin-bottom: 5px; background-color: #1e1e1e; border: 1px solid #333; padding: 5px; border-radius: 6px; text-align: center; }
 .info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.1em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
