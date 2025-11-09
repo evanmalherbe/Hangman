@@ -13,6 +13,8 @@ This little Hangman game is built with **.NET Core 8 with MVC architecture** and
 - [Rules of Game](#rules-of-game)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 - [Credits](#credits)
 
 ## Description
@@ -39,6 +41,20 @@ This project is a .NET Core MVC web application. To run it outside of Visual Stu
 ## Usage
 Once you open the project in your browser `http://localhost:5000` (or similar), you will see the main game screen. Since the app automatically chooses a secret word from the 100 word list for the user, you can immediately start making guesses by typing a letter into the box and clicking the **Guess letter** button. See image below.<br/><br/>
 ![Guess a letter - screenshot](https://imagestore-production.up.railway.app/images/hangman/first-guess.png)
+
+## Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement" or "bug".
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## License
+Distributed under the **MIT License**. See **[LICENSE](LICENSE)** for more information.
 
 ## Credits
 This project was created by Evan Malherbe - October 2025 - [GitHub profile](https://github.com/evanmalherbe)
