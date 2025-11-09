@@ -27,9 +27,13 @@ function glowDiv(divId, colour)
 }
 function saveWord()
 {
-	let $wordProgressContainer = $("#word-progress-container");
-	secretArray = secretWord.split("");
+	if (!secretWord)
+	{
+		return;
+	}
 
+	secretArray = secretWord.split("");
+	let $wordProgressContainer = $("#word-progress-container");
 	secretArray.forEach((secretLetter, index) =>
 	{
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
@@ -111,15 +115,15 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 		}
 	}
 }
-function showWonMessage()
+function showAlertMessage(title, html, imageUrl, altText)
 {
 	Swal.fire({
-		title: "You WIN!",
-		html: `The secret word was:<br/> <h2>${secretWord}<h2>`,
-		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-win-colour.png",
+		title: title,
+		html: html,
+		imageUrl: imageUrl,
 		imageWidth: 500,
 		imageHeight: 287,
-		imageAlt: "Hangman winner image",
+		imageAlt: altText,
 		showCancelButton: false,
 		confirmButtonColor: "#0d6efd", // primary blue
 		confirmButtonText: "Ok"
@@ -131,25 +135,13 @@ function showWonMessage()
 		}
 	});
 }
+function showWonMessage()
+{
+	showAlertMessage("You WIN!", `The secret word was:<br/> <h2>${secretWord}<h2>`, "https://imagestore-production.up.railway.app/images/hangman/hangman-win-colour.png", "Hangman winner image");
+}
 function showLostMessage()
 {
-	Swal.fire({
-		title: "You LOSE!",
-		html: `The secret word was:<br/> <h2>${secretWord}<h2>`,
-		imageUrl: "https://imagestore-production.up.railway.app/images/hangman/hangman-banner.png",
-		imageWidth: 500,
-		imageHeight: 287,
-		imageAlt: "Hangman banner image",
-		showCancelButton: false,
-		confirmButtonColor: "#0d6efd", // primary blue
-		confirmButtonText: "Ok"
-	}).then((result) =>
-	{
-		if (result.isConfirmed)
-		{
-			location.reload();
-		}
-	});
+	showAlertMessage("You LOSE!", `The secret word was:<br/> <h2>${secretWord}<h2>`,"https://imagestore-production.up.railway.app/images/hangman/hangman-banner.png" , "Hangman banner image");
 }
 async function alreadyTriedThisLetter(userMessage, letter)
 {
