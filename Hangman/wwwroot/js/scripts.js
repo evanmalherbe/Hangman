@@ -35,6 +35,10 @@ function saveWord()
 		$wordProgressContainer.append(`<div class="col-1"><span class="letter-dash" id="letter-dash-${index}"><h3>-</h3></span><span class="letter-match" id="letter-match-${index}" style="display:none"><h3>${secretLetter}</h3></span></div>`);
 	});
 
+	// Let user know length of secret word
+	$("#secret-word-box > h2").append(`&nbsp;(${secretArray.length} letters)`)
+
+	// Take length of word into account when deciding spacing of dashes
 	if (secretArray.length > 10)
 	{
 		let screenWidth = window.innerWidth;

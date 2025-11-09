@@ -120,10 +120,10 @@ namespace Hangman.Controllers
 		public IActionResult Index(HomeViewModel model)
 		{
 			List<string> list = _wordList.ToList(); // 100 words
+			// Choose random word from list
 			Random random = new Random();
 			int randomIndex = random.Next(1,101);
 			model.SecretWord = list[randomIndex - 1];
-
 			return View(model);
 		}
 
