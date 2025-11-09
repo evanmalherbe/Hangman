@@ -23,38 +23,10 @@ function glowDiv(divId, colour)
 	void div.offsetWidth; // trick to restart animation
 	div.classList.add(glowColour);
 }
-function hideContainers(input)
-{
-	if (input === "" || input === undefined)
-	{
-		return;
-	}
-	if (input === "hide")
-	{
-		// Hide secret word entry and show guess entry and other stats
-		$("#secret-word-container").removeClass("d-flex").hide();
-		$("#guess--letter-container").addClass("d-flex").removeClass("d-none");
-		$("#word-progress-container").addClass("d-flex").removeClass("d-none");
-		$("#used-letters-container").removeClass("d-none");
-		$("#tries-counter-parent").removeClass("d-none");
-	}
-	else
-	{
-		// show
-		$("#secret-word-container").removeClass("d-none").show();
-		$("#guess-letter-container").addClass("d-none").removeClass("d-flex");
-		$("#word-progress-container").empty().addClass("d-none").removeClass("d-flex");
-		$("#used-letters-container").addClass("d-none").removeClass("d-flex");
-		$("#tries-counter-parent").addClass("d-none").removeClass("d-flex");
-	}
-}
 function saveWord()
 {
 	let $wordProgressContainer = $("#word-progress-container");
 	secretArray = secretWord.split("");
-
-	// Hide secret word entry and show guess entry and other stats
-	//hideContainers("hide");
 
 	secretArray.forEach((secretLetter, index) =>
 	{
@@ -122,7 +94,6 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 		}
 	}
 }
-
 function showWonMessage()
 {
 	Swal.fire({
@@ -173,9 +144,26 @@ async function alreadyTriedThisLetter(userMessage, letter)
 	await delay(2000);
 	userMessage.empty().append("<h3>&nbsp;</h3>");
 }
+function whichGuess()
+{
+	debugger;
+	let input = $("#guess-letter-input").val();
+	if (!input)
+	{
+		return;
+	}
+	if (input.length === 1)
+	{
+		letterGuess();
+	}
+	else
+	{
+		wordGuess();
+	}
+}
 async function wordGuess()
 {
-	let word = $("#guess-word-input").val();
+	let word = $("#guess-letter-input").val();
 	if (!word)
 	{
 		return;
@@ -278,7 +266,7 @@ async function wrongWordChoice()
 		$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
 		isInitialGuess = false;
 	}
-	$("#guess-word-input").val("");
+	$("#guess-letter-input").val("");
 	let $userMessage = $("#userMessage");
 	$userMessage.removeClass("text-success").addClass("text-danger");
 	$userMessage.empty().append("<h3>Oh no!</h3>");
