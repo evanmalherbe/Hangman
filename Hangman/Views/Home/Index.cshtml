@@ -16,7 +16,7 @@
 
   <main class="game-area">
     <section id="hangman-visual" class="visual-area">
-      <img id="hangman-image" src="/images/hangman_0.png" alt="Hangman Character" />
+      <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
     </section>
 
     <section class="game-info">
@@ -25,27 +25,25 @@
         <p id="user-message"></p>
       </div>
 
-      <div class="info-box secret-word-box">
-        <h2>Secret Word</h2>
-        <p id="secret-word-display">_ _ _ _ _ _ _</p>
-      </div>
-
-      <div class="info-box tries-box">
-        <h2>Remaining Tries</h2>
-        <p id="remaining-tries">11</p>
-      </div>
-
-      <div class="info-box used-letters-box">
-        <h2>Used Letters</h2>
-        <p id="used-letters-display">A, E, I, O</p>
-      </div>
-
-      <hr>
-
       <div class="guess-form">
         <label for="guess-input">Guess a Letter:</label>
         <input type="text" id="guess-input" maxlength="1" pattern="[a-zA-Z]" placeholder="Enter a letter" />
         <button id="submit-guess-button" class="btn">Guess</button>
+      </div>
+
+      <div class="info-box secret-word-box">
+        <h2>Secret Word</h2>
+        <p class="mb-0" id="secret-word-display">_ _ _ _ _ _ _</p>
+      </div>
+
+      <div class="info-box tries-box">
+        <h2>Remaining Tries</h2>
+        <p class="mb-0" id="remaining-tries">11</p>
+      </div>
+
+      <div class="info-box used-letters-box">
+        <h2>Used Letters</h2>
+        <p class="mb-0" id="used-letters-display">A, E, I, O</p>
       </div>
 
     </section>

@@ -6,42 +6,42 @@
   Tertiary Accent (Boxes): #1e1e1e (Dark Grey)
 */
 
-body { background-color: #121212; color: #f0f0f0; /* Light text on dark background */ font-family: 'Arial', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+body { min-height: 100vh; /* Ensure the body takes up at least the full viewport height */ display: flex; /* Helps center and control content vertically */ flex-direction: column; background-color: #121212; color: #f0f0f0; /* Light text on dark background */ font-family: 'Arial', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.container { width: 90%; /* Use a percentage width */ margin: auto; /* Centers the container */ padding: 20px; flex-grow: 1; /* Allows container to take available space */ }
 
 /* --- Header & Title --- */
 
-header { border-bottom: 2px solid #CC0000; padding-bottom: 10px; margin-bottom: 30px; }
+header { border-bottom: 2px solid #CC0000; padding-bottom: 5px; margin-bottom: 20px; }
 
 .logo-title { display: flex; align-items: center; }
 
 .logo-placeholder { width: 60px; height: 60px; background-color: #CC0000; /* Placeholder color for the logo */ margin-right: 15px; border-radius: 5px; /* Optional: Add a subtle graphic to the logo placeholder */ display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 24px; }
 
-#game-heading { font-size: 3em; color: #CC0000; /* Red heading for high impact */ margin: 0; text-transform: uppercase; letter-spacing: 5px; }
+#game-heading { font-size: 2.5em; color: #CC0000; /* Red heading for high impact */ margin: 0; text-transform: uppercase; letter-spacing: 5px; }
 
 /* --- Main Game Area Layout --- */
 
-.game-area { display: flex; gap: 40px; }
+.game-area { display: flex; gap: 30px; max-height: calc(100vh - 150px); overflow:hidden; }
 
-.visual-area { flex: 2; /* Takes up more space for the visual element */ background-color: #1e1e1e; border: 1px solid #333; padding: 20px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+.visual-area { flex: 2; background-color: #1e1e1e; height: 100%; border: 1px solid #333; padding: 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
 
-#hangman-image { max-width: 100%; height: auto; /* You may want to ensure a max height depending on your images */ max-height: 500px; }
+#hangman-image { max-width: 100%; max-height: 100%; height: auto; width: auto; object-fit:contain; }
 
-.game-info { flex: 1; /* Takes up less space */ display: flex; flex-direction: column; gap: 20px; }
+.game-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 
 /* --- Info Boxes --- */
 
-.info-box { background-color: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 6px; text-align: center; }
+.info-box { background-color: #1e1e1e; border: 1px solid #333; padding: 10px; border-radius: 6px; text-align: center; }
 
-	.info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.2em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
+	.info-box h2 { color: #CC0000; margin-top: 0; font-size: 1.1em; border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; }
 
 /* Specific Info Box Styles */
-#secret-word-display { font-size: 2.5em; letter-spacing: 15px; /* Increase spacing for clear underscores */ font-weight: bold; color: #f0f0f0; }
+#secret-word-display { flex: 1;font-size: 2em; letter-spacing: 10px; /* Increase spacing for clear underscores */ font-weight: bold; color: #f0f0f0; }
 
-#remaining-tries { font-size: 3em; font-weight: bold; color: #f0f0f0; }
+#remaining-tries { flex:1;font-size: 2.5em; font-weight: bold; color: #f0f0f0; }
 
-#used-letters-display { font-size: 1.5em; letter-spacing: 2px; color: #aaa; /* Slightly subdued text for used letters */ }
+#used-letters-display { flex:1;font-size: 1.5em; letter-spacing: 2px; color: #aaa; /* Slightly subdued text for used letters */ }
 
 /* --- Message Box --- */
 
@@ -53,7 +53,7 @@ header { border-bottom: 2px solid #CC0000; padding-bottom: 10px; margin-bottom: 
 
 /* --- Guess Input Form --- */
 
-.guess-form { display: flex; flex-direction: column; gap: 10px; background-color: #1e1e1e; padding: 20px; border-radius: 6px; border: 1px solid #333; }
+.guess-form { display: flex; flex:1; flex-direction: column; gap: 10px; background-color: #1e1e1e; padding: 10px; border-radius: 6px; border: 1px solid #333; }
 
 	.guess-form label { font-size: 1.1em; color: #f0f0f0; }
 

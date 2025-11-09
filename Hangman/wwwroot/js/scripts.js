@@ -53,7 +53,6 @@ function saveWord()
 	let $wordProgressContainer = $("#word-progress-container");
 	secretArray = secretWord.split("");
 
-
 	// Hide secret word entry and show guess entry and other stats
 	//hideContainers("hide");
 
