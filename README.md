@@ -1,5 +1,5 @@
 # Hangman
-This little Hangman game is built with **.NET Core 8 with MVC architecture** and **Razor** views. Much of the game logic and functionality uses **Javascript**.<br/> 
+This simple, yet addictive Hangman game is built with **.NET Core 8 with MVC architecture** and **Razor** views. Much of the game logic and functionality uses **Javascript**. I challenge you to give it a try! It's quite fun.<br/> 
 
 ### Technologies
 ![.NET 8](https://img.shields.io/badge/.NET%208-000)
@@ -24,7 +24,7 @@ Hangman is a guessing game for two or more players. One player thinks of a word,
 ## Rules of Game
 The word to guess is represented by a row of dashes representing each letter or number of the word. If the guessing player suggests a letter which occurs in the word, the app adds the letter in all the places where it occurs in the word (if more than one place). If the suggested letter does not occur in the word, another element is added to the hanging stick figure which brings the poor stick man closer to his death (and the player closer to losing the game)! Generally, the game ends once the word is guessed (hooray!), or if the stick figure is complete — signifying that all guesses have been used and the player loses the game.
 
-The player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. If the guesser makes enough incorrect guesses to allow the other player to complete the diagram, the guesser loses. However, the guesser can also win by guessing all the letters that appear in the word, thereby completing the word, before the diagram is completed.
+The player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over immediately and the guesser wins. Otherwise, the guesser is penalised by adding another element to the stick figure. 
 
 ## Getting Started
 This project is a .NET Core MVC web application. To run it outside of Visual Studio, you'll need the **.NET Core SDK** installed on your machine (the version that is compatible with this project is **8.0**). 
