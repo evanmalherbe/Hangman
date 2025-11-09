@@ -10,6 +10,17 @@ let matchedLettersArray = [];
 let matchingLettersArray = [];
 let usedLettersArray = [];
 let isInitialGuess = true;
+const guessInput = document.getElementById("guess-letter-input");
+const guessButton = document.getElementById("submit-guess-button");
+
+guessInput.addEventListener('keyup', function (event)
+{
+	if (event.key === "Enter" || event.keyCode === 13)
+	{
+		event.preventDefault();
+		guessButton.click();
+	}
+})
 
 $(document).ready(async function ()
 {
