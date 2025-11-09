@@ -57,7 +57,7 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 	if (matchArray.length > 0)
 	{
 		// Show user message
-		userMessage.empty().append("<h3>Good job!</h3>").removeClass("text-danger").addClass("text-success");
+		userMessage.empty().removeClass("text-danger").addClass("text-success").append("Good job!");
 		addToUsedLettersBox(letter);
 		glowDiv("word-progress-container", "green");
 
@@ -97,7 +97,7 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 
 		// show user message for 2 seconds
 		await delay(2000);
-		userMessage.empty().append("<h3>&nbsp;</h3>");
+		userMessage.empty().append("&nbsp;");
 
 		// All guessed letters match secret word
 		if (matchedLettersArray.length == secretArray.length)
@@ -151,11 +151,11 @@ async function alreadyTriedThisLetter(userMessage, letter)
 {
 	// Already tried this letter
 	userMessage.removeClass("text-danger").addClass("text-success");
-	userMessage.empty().append("<h3>Already tried this letter!</h3>");
+	userMessage.empty().append("Already tried this letter!");
 	addToUsedLettersBox(letter);
 	// remove message after delay
 	await delay(2000);
-	userMessage.empty().append("<h3>&nbsp;</h3>");
+	userMessage.empty().append("&nbsp;");
 }
 function whichGuess()
 {
@@ -267,8 +267,6 @@ async function letterGuess()
 			await wrongLetterChoice($userMessage, letter);
 		}
 	}
-	// Add to used letters array
-	//addToUserLettersBox(letter);
 }
 async function wrongWordChoice()
 {
@@ -281,14 +279,14 @@ async function wrongWordChoice()
 	$("#guess-letter-input").val("");
 	let $userMessage = $("#userMessage");
 	$userMessage.removeClass("text-success").addClass("text-danger");
-	$userMessage.empty().append("<h3>Oh no!</h3>");
+	$userMessage.empty().append("Oh no!");
 
 	failedTriesCount++;
 	glowDiv("tries-counter", "red");
 	showRelevantImage();
 	// remove message after delay
 	await delay(2000);
-	$userMessage.empty().append("<h3>&nbsp;</h3>");
+	$userMessage.empty().append("&nbsp;");
 
 	if (failedTriesCount == availableTries)
 	{
@@ -298,14 +296,14 @@ async function wrongWordChoice()
 async function wrongLetterChoice($userMessage, letter)
 {
 	$userMessage.removeClass("text-success").addClass("text-danger");
-	$userMessage.empty().append("<h3>Oh no!</h3>");
+	$userMessage.empty().append("Oh no!");
 	addToUsedLettersBox(letter);
 	failedTriesCount++;
 	glowDiv("tries-counter", "red");
 	showRelevantImage();
 	// remove message after delay
 	await delay(2000);
-	$userMessage.empty().append("<h3>&nbsp;</h3>");
+	$userMessage.empty().append("&nbsp;");
 
 	if (failedTriesCount == availableTries)
 	{
@@ -318,7 +316,6 @@ function addToUsedLettersBox(letter)
 	if (!usedLettersArray.includes(letter))
 	{
 		usedLettersArray.push(letter);
-
 		$("#used-letters").append(letter.toUpperCase());
 	}
 }
