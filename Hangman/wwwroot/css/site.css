@@ -54,5 +54,20 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 /* Button Styling */
 .btn { margin-bottom: 5px; background-color: #CC0000; color: #f0f0f0; border: none; border-radius: 4px; cursor: pointer; font-size: 1.2em; transition: background-color 0.2s ease; text-transform: uppercase; }
 .btn:hover { background-color: #ff3333; /* Lighter red on hover */ }
-.text-success { color: #0dbe42 !important }
-.text-danger { color: #ff3333 !important }
+.text-success { color: #0dbe42 !important } /*Brighter green colour*/
+.text-danger { color: #ff3333 !important } /*Brighter red colour*/
+
+/* Glowing Effects - Adjusted colors for better contrast */
+.glowGreen { animation: glowGreenBorder 2s ease-in-out forwards; }
+.glowRed { animation: glowRedBorder 2s ease-in-out forwards; }
+
+@keyframes glowGreenBorder {
+  0% { border-color: #333; /* Bootstrap default border */ box-shadow: none; }
+  50% { border-color: #28a745; /* Bootstrap success green */ box-shadow: 0 0 35px 10px #0dbe42; /* Green glow */ }
+  100% { border-color: #333; box-shadow: none; }
+}
+@keyframes glowRedBorder {
+  0% { border-color: #333; box-shadow: none; }
+  50% { border-color: #dc3545; /* Bootstrap danger red */ box-shadow: 0 0 35px 10px #ff3333; /* Red glow */ }
+  100% { border-color: #333; box-shadow: none; }
+}

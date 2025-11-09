@@ -14,8 +14,8 @@ let isInitialGuess = true;
 $(document).ready(async function ()
 {
 	//$(document).attr("title", pageTitle);
-	let screenWidth = window.innerWidth;
-	$("#game-heading").append(screenWidth);
+	//let screenWidth = window.innerWidth;
+	//$("#game-heading").append(screenWidth);
 });
 function glowDiv(divId, colour) 
 {
@@ -59,7 +59,7 @@ async function processMatchingLetters(matchArray, userMessage, letter)
 		// Show user message
 		userMessage.empty().removeClass("text-danger").addClass("text-success").append("Good job!");
 		addToUsedLettersBox(letter);
-		glowDiv("word-progress-container", "green");
+		glowDiv("secret-word-box", "green");
 
 		let matchedLettersIndexArray = [];
 		matchArray.forEach((guessedLetter, index) => 
