@@ -1,0 +1,17 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every 3 days
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual trigger from the GitHub UI for testing
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send keep-alive query to Supabase PostgREST API
+        run: |
+          curl -s -f -X GET "https://kwnrnalgyqybverocoro.supabase.co/rest/v1/framework?select=id&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bnJuYWxneXF5YnZlcm9jb3JvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzODMzNTQsImV4cCI6MjA3Njk1OTM1NH0.m7u42s7RbTK2e5SRoefUedNpvyna2JKtsiRk670BizE" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bnJuYWxneXF5YnZlcm9jb3JvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MTM4MzM1NCwiZXhwIjoyMDc2OTU5MzU0fQ.VhZ_0atnJEdJ2fIFoG2XtSWsNDfZdznpJs7AVAmJcL8"
