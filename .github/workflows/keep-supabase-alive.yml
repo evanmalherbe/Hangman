@@ -12,6 +12,5 @@ jobs:
     steps:
       - name: Send keep-alive query to Supabase PostgREST API
         run: |
-          curl -s -f -X GET "{{ secrets.SUPABASE_URL }}/rest/v1/framework?select=id&limit=1" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+         curl -s -f -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/${{ secrets.SUPABASE_TABLE_NAME }}?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}"
