@@ -155,11 +155,11 @@ function showAlertMessage(title, html, imageUrl, altText)
 }
 function showWonMessage()
 {
-	showAlertMessage("You WIN!", `The secret word was:<br/> <h2>${secretWord}<h2>`, `${baseUrl}/hangman-win-colour.png`, "Hangman winner image");
+	showAlertMessage("You WIN!", `The secret word was:<br/> <h2>${secretWord}<h2>`, `${baseUrl}/hangman-win-colour.webp`, "Hangman winner image");
 }
 function showLostMessage()
 {
-	showAlertMessage("You LOSE!", `The secret word was:<br/> <h2>${secretWord}<h2>`,`${baseUrl}/hangman-banner.png` , "Hangman banner image");
+	showAlertMessage("You LOSE!", `The secret word was:<br/> <h2>${secretWord}<h2>`,`${baseUrl}/hangman-banner.webp` , "Hangman banner image");
 }
 async function alreadyTriedThisLetter(userMessage, letter)
 {
@@ -211,7 +211,7 @@ async function letterGuess()
 	if (isInitialGuess)
 	{
 		// Replace starting image with faded one on first guess
-		$("#hangman-image").attr("src", `${baseUrl}/hangman-fade.png`);
+		$("#hangman-image").attr("src", `${baseUrl}/hangman-fade.webp`);
 		isInitialGuess = false;
 	}
 
@@ -287,7 +287,7 @@ async function wrongWordChoice()
 	if (isInitialGuess)
 	{
 		// Replace starting image with faded one on first guess
-		$("#hangman-image").attr("src",`${baseUrl}/hangman-fade.png`);
+		$("#hangman-image").attr("src",`${baseUrl}/hangman-fade.webp`);
 		isInitialGuess = false;
 	}
 	$("#guess-letter-input").val("");
@@ -342,11 +342,11 @@ function showRelevantImage()
 	let imageToShow = "";
 	if (failedTriesCount > 0 && failedTriesCount < availableTries)
 	{
-		imageToShow = `${baseUrl}/hangman-${failedTriesCount}.png`;
+		imageToShow = `${baseUrl}/hangman-${failedTriesCount}.webp`;
 	}
 	if (failedTriesCount == availableTries)
 	{
-		imageToShow = `${baseUrl}/hangman-final.png`;
+		imageToShow = `${baseUrl}/hangman-final.webp`;
 	}
 	$("#hangman-image").attr("src", imageToShow);
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);
