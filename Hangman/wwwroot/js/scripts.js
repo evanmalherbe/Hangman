@@ -12,6 +12,7 @@ let usedLettersArray = [];
 let isInitialGuess = true;
 const guessInput = document.getElementById("guess-letter-input");
 const guessButton = document.getElementById("submit-guess-button");
+let baseUrl = "";
 
 guessInput.addEventListener('keyup', function (event)
 {
@@ -27,6 +28,12 @@ $(document).ready(async function ()
 	//$(document).attr("title", pageTitle);
 	//let screenWidth = window.innerWidth;
 	//$("#game-heading").append(screenWidth);
+});
+document.addEventListener('DOMContentLoaded', function ()
+{
+	const configEl = document.getElementById('appConfig');
+  baseUrl = configEl.dataset.baseUrl;
+
 });
 function glowDiv(divId, colour) 
 {
@@ -148,11 +155,11 @@ function showAlertMessage(title, html, imageUrl, altText)
 }
 function showWonMessage()
 {
-	showAlertMessage("You WIN!", `The secret word was:<br/> <h2>${secretWord}<h2>`, "https://imagestore-production.up.railway.app/images/hangman/hangman-win-colour.png", "Hangman winner image");
+	showAlertMessage("You WIN!", `The secret word was:<br/> <h2>${secretWord}<h2>`, `${baseUrl}/hangman-win-colour.png`, "Hangman winner image");
 }
 function showLostMessage()
 {
-	showAlertMessage("You LOSE!", `The secret word was:<br/> <h2>${secretWord}<h2>`,"https://imagestore-production.up.railway.app/images/hangman/hangman-banner.png" , "Hangman banner image");
+	showAlertMessage("You LOSE!", `The secret word was:<br/> <h2>${secretWord}<h2>`,`${baseUrl}/hangman-banner.png` , "Hangman banner image");
 }
 async function alreadyTriedThisLetter(userMessage, letter)
 {
@@ -204,7 +211,7 @@ async function letterGuess()
 	if (isInitialGuess)
 	{
 		// Replace starting image with faded one on first guess
-		$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
+		$("#hangman-image").attr("src", `${baseUrl}/hangman-fade.png`);
 		isInitialGuess = false;
 	}
 
@@ -280,7 +287,7 @@ async function wrongWordChoice()
 	if (isInitialGuess)
 	{
 		// Replace starting image with faded one on first guess
-		$("#hangman-image").attr("src", "https://imagestore-production.up.railway.app/images/hangman/hangman-fade.png");
+		$("#hangman-image").attr("src",`${baseUrl}/hangman-fade.png`);
 		isInitialGuess = false;
 	}
 	$("#guess-letter-input").val("");
@@ -335,11 +342,11 @@ function showRelevantImage()
 	let imageToShow = "";
 	if (failedTriesCount > 0 && failedTriesCount < availableTries)
 	{
-		imageToShow = `https://imagestore-production.up.railway.app/images/hangman/hangman-${failedTriesCount}.png`;
+		imageToShow = `${baseUrl}/hangman-${failedTriesCount}.png`;
 	}
 	if (failedTriesCount == availableTries)
 	{
-		imageToShow = `https://imagestore-production.up.railway.app/images/hangman/hangman-final.png`;
+		imageToShow = `${baseUrl}/hangman-final.png`;
 	}
 	$("#hangman-image").attr("src", imageToShow);
 	$("#tries-count-message").empty().append(`${availableTries - failedTriesCount}`);

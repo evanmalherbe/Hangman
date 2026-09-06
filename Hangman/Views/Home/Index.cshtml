@@ -1,9 +1,10 @@
 ﻿@*Hangman home page*@
 @model Hangman.ViewModel.HomeViewModel
-
+@inject IConfiguration configuration;
 @{
   string secretWord = Model?.SecretWord ?? "";
   int wordLength = secretWord.Length;
+  string baseUrl = configuration["ImageSettings:BaseUrl"];
 }
 
 <div class="container">
@@ -18,7 +19,7 @@
 
   <main class="game-area row">
     <section id="hangman-graphic-container" class="visual-area d-flex col-12 col-lg-6 justify-content-center align-items-center">
-      <img id="hangman-image" src="https://imagestore-production.up.railway.app/images/hangman/hangman-final.png" alt="Hangman Character" />
+      <img id="hangman-image" src="@baseUrl/hangman-final.png" alt="Hangman Character" />
     </section>
 
     <section class="game-info row col-12 col-lg-6 g-0 mt-0">
